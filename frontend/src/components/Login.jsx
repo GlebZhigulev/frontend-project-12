@@ -1,23 +1,58 @@
-import { Formik, Form, Field } from 'formik';
+import { Formik, Form, Field, ErrorMessage } from 'formik';
+import * as Yup from 'yup';
+import axios from 'axios';
+import { useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+import { setToken, setError } from './slices/authSlice.jsx';
 
-function Login() {
-    console.log(1);
-    return (
-        <div>
-            <h1>Login</h1>
-            <Formik
-            initialValues={{username: '',password: ''}}>
-                <Form>
-                    <label htmlFor='username'>Username</label>
-                    <Field id='username' name='username' placeholder="Username" />
+const Login = () => {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
-                    <label htmlFor='password'>Password</label>
-                    <Field id='password' name='password' type='password' placeholder='Password' />
+  // Валидация с использованием Yup
+  const validationSchema = Yup.object({
+    username: Yup.string().required('Username is required'),
+    password: Yup.string().required('Password is required'),
+  });
 
-                    <button type='submit'>Submit</button>
-                </Form>
-            </Formik>
-        </div>
-    )
+  const handleSubmit = async (values, { setSubmitting }) => {
+    try {
+      const response = await axios.post('/api/login', values);
+      const { token } = response.data;
+      dispatch(setToken(token)); // Сохраняем токен в Redux и localStorage
+      navigate('/'); // Перенаправляем на главную
+    } catch (error) {
+      dispatch(setError('Неправильное имя пользователя или пароль'));
+    } finally {
+      setSubmitting(false); // Разрешаем повторную отправку формы
+    }
+  };
+
+  return (
+    <Formik
+      initialValues={{ username: '', password: '' }}
+      validationSchema={validationSchema}
+      onSubmit={handleSubmit}
+    >
+      {({ isSubmitting }) => (
+        <Form>
+          <div>
+            <label>Username:</label>
+            <Field type="text" name="username" />
+            <ErrorMessage name="username" component="div" />
+          </div>
+          <div>
+            <label>Password:</label>
+            <Field type="password" name="password" />
+            <ErrorMessage name="password" component="div" />
+          </div>
+          <button type="submit" disabled={isSubmitting}>
+            Login
+          </button>
+        </Form>
+      )}
+    </Formik>
+  );
 };
+
 export default Login;
