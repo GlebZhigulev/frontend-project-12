@@ -3,18 +3,19 @@ import axios from 'axios';
 
 export const fetchChatData = createAsyncThunk(
     'chat/fetchChatData',
-    async,(_,{ getState, rejectWithValue }) => {
-        try {
-            const token = getState().auth.token;
-            const response = await axios.get('/api/chat', {
-                headers: { Authorization: `Bearer ${token}`},
-            });
-            return response.data;
-        } catch (error) {
-            return rejectWithValue(error.response.data);
-        }
+    async (_, { getState, rejectWithValue }) => {
+      try {
+        const token = getState().auth.token;
+        const response = await axios.get('/api/chat', {
+          headers: { Authorization: `Bearer ${token}` },
+        });
+        return response.data;
+      } catch (error) {
+        return rejectWithValue(error.response.data);
+      }
     }
-);
+  );
+  
 
 const chatSlice = createSlice({
     name: 'chat',
