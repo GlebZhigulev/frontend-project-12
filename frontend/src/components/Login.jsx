@@ -3,7 +3,7 @@ import * as Yup from 'yup';
 import axios from 'axios';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { setToken, setError } from './slices/authSlice.jsx';
+import { setToken, setError } from './slices/authSlice';
 
 const Login = () => {
   const dispatch = useDispatch();
@@ -17,7 +17,7 @@ const Login = () => {
 
   const handleSubmit = async (values, { setSubmitting }) => {
     try {
-      const response = await axios.post('/api/login', values);
+      const response = await axios.post('/api/v1/login', values);
       const { token } = response.data;
       dispatch(setToken(token)); // Сохраняем токен в Redux и localStorage
       navigate('/'); // Перенаправляем на главную

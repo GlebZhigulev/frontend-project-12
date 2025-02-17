@@ -6,7 +6,7 @@ export const fetchChatData = createAsyncThunk(
     async (_, { getState, rejectWithValue }) => {
       try {
         const token = getState().auth.token;
-        const response = await axios.get('/api/chat', {
+        const response = await axios.get('/api/v1/data', {
           headers: { Authorization: `Bearer ${token}` },
         });
         return response.data;
@@ -22,13 +22,16 @@ const chatSlice = createSlice({
     initialState: {
         channels: [],
         messages: [],
-        status: [],
+        status: 'idle',
         error: null,
     },
-    reducers: {},
+    reducers: {
+      addMessage: (state, action) => {
+      state.messages.push(action.payload);
+    },},
     extraReducers: (builder) => {
         builder
-            .addCase(fetchChatData.pendind, (state) => {
+            .addCase(fetchChatData.pending, (state) => {
                 state.status = 'loading';
             })
             .addCase(fetchChatData.fulfilled, (state, action) => {
@@ -42,5 +45,5 @@ const chatSlice = createSlice({
             });
     }
 });
-
+export const { addMessage } = chatSlice.actions;
 export default chatSlice.reducer;
