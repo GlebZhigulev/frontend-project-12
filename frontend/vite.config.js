@@ -6,11 +6,18 @@ export default defineConfig({
   server: {
     port: 5002,
     proxy: {
-      // Проксируем запросы к API
-      '/api': {
+      '/api': {  // ← ВАЖНО: указываем путь, для которого включаем прокси
         target: 'http://localhost:5001',
+        changeOrigin: true,
+        secure: false,
+        configure: (proxy, options) => {
+          proxy.on('proxyReq', (proxyReq, req, res) => {
+            proxyReq.setHeader('Access-Control-Allow-Origin', '*');
+            proxyReq.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
+            proxyReq.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
+          });
+        },
       },
-      // Проксируем WebSocket соединения
       '/socket.io': {
         target: 'ws://localhost:5001',
         ws: true,

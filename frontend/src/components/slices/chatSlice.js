@@ -2,19 +2,31 @@ import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
 
 export const fetchChatData = createAsyncThunk(
-    'chat/fetchChatData',
-    async (_, { getState, rejectWithValue }) => {
-      try {
-        const token = getState().auth.token;
-        const response = await axios.get('/api/v1/data', {
-          headers: { Authorization: `Bearer ${token}` },
-        });
-        return response.data;
-      } catch (error) {
-        return rejectWithValue(error.response.data);
-      }
+  'chat/fetchChatData',
+  async (_, { getState, rejectWithValue }) => {
+    try {
+      const token = getState().auth.token;
+
+      // Запрос каналов
+      const channelsResponse = await axios.get('/api/v1/channels', {
+        headers: { Authorization: `Bearer ${token}` },
+      });
+
+      // Запрос сообщений
+      const messagesResponse = await axios.get('/api/v1/messages', {
+        headers: { Authorization: `Bearer ${token}` },
+      });
+
+      return {
+        channels: channelsResponse.data,
+        messages: messagesResponse.data,
+      };
+    } catch (error) {
+      return rejectWithValue(error.response.data);
     }
-  );
+  }
+);
+
   
 
 const chatSlice = createSlice({
@@ -27,8 +39,13 @@ const chatSlice = createSlice({
     },
     reducers: {
       addMessage: (state, action) => {
-      state.messages.push(action.payload);
-    },},
+        if (action.payload) {
+          state.messages.push(action.payload);
+        } else {
+          console.warn('❌ Пустое сообщение пришло в addMessage:', action);
+        }
+      },
+      },
     extraReducers: (builder) => {
         builder
             .addCase(fetchChatData.pending, (state) => {
