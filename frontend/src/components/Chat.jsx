@@ -8,9 +8,16 @@ import store from './slices/store';
 import ChannelForm from './ChannelForm';
 import RenameChannelModal from './RenameChannelModal';
 import DeleteChannelModal from './DeleteChannelModal';
+import { useTranslation } from 'react-i18next';
+import { toast } from 'react-toastify';
+import leoProfanity from 'leo-profanity';
+
+
+
 
 const Chat = () => {
   const dispatch = useDispatch();
+  const { t } = useTranslation();
   const { messages, status } = useSelector((state) => state.chat);
   const { channels, currentChanelId } = useSelector((state) => state.channels);
   const [messageText, setMessageText] = useState('');
@@ -33,8 +40,17 @@ const Chat = () => {
   }, [dispatch]);
 
   useEffect(() => {
+    if (status === 'failed') {
+      toast.error(t('chat.errorLoading'));
+    }
+  }, [status, t]);
+
+  useEffect(() => {
     const handleOnline = () => setIsOffline(false);
-    const handleOffline = () => setIsOffline(true);
+    const handleOffline = () => {
+    setIsOffline(true);
+    toast.warn(t('chat.offline'));
+    };
     window.addEventListener('online', handleOnline);
     window.addEventListener('offline', handleOffline);
     return () => {
@@ -83,7 +99,7 @@ const Chat = () => {
     setIsSending(true);
     try {
       const response = await apiClient.post('/messages', {
-        body: messageText,
+        body: leoProfanity.clean(messageText),
         channelId: currentChannel.id,
       });
       if (response.data) {
@@ -100,14 +116,14 @@ const Chat = () => {
 
   if (status === 'loading') return (
     <div className="container my-3">
-      <div className="alert alert-info">Loading messages...</div>
+      <div className="alert alert-info">{t('chat.loading')}</div>
     </div>
   );
 
   if (status === 'failed') return (
     <div className="container my-3">
-      <div className="alert alert-danger">Error loading chat.</div>
-      <button className="btn btn-primary" onClick={() => dispatch(fetchChatData())}>Retry</button>
+      <div className="alert alert-danger">{t('chat.errorLoading')}</div>
+      <button className="btn btn-primary" onClick={() => dispatch(fetchChatData())}>{t('chat.retry')}</button>
     </div>
   );
 
@@ -117,7 +133,7 @@ const Chat = () => {
     <div className="container-fluid my-3">
       {isOffline && (
         <div className="alert alert-warning" role="alert">
-          You are offline. Chat is unavailable.
+            {t('chat.offline')}
         </div>
       )}
       <div className="row">
@@ -125,8 +141,8 @@ const Chat = () => {
         <div className="col-md-3 mb-3">
           <div className="card">
             <div className="card-header d-flex justify-content-between align-items-center">
-              <span>Channels</span>
-              <button className="btn btn-sm btn-primary" onClick={() => setShowAddChannel(true)}>Add Channel</button>
+              <span>{t('chat.channels')}</span>
+              <button className="btn btn-sm btn-primary" onClick={() => setShowAddChannel(true)}>{t('chat.addChannel')}</button>
             </div>
             <ul className="list-group list-group-flush">
               {channels.map((channel) => (
@@ -141,8 +157,8 @@ const Chat = () => {
                   </button>
                   {channel.removable && (
                     <div className="btn-group btn-group-sm">
-                      <button className="btn btn-secondary" onClick={() => setRenameChannelData(channel)}>Rename</button>
-                      <button className="btn btn-danger" onClick={() => setDeleteChannelData(channel)}>Delete</button>
+                      <button className="btn btn-secondary" onClick={() => setRenameChannelData(channel)}>{t('chat.rename')}</button>
+                      <button className="btn btn-danger" onClick={() => setDeleteChannelData(channel)}>{t('chat.delete')}</button>
                     </div>
                   )}
                 </li>
@@ -154,7 +170,7 @@ const Chat = () => {
         <div className="col-md-9">
           <div className="card">
             <div className="card-header">
-              Messages ({currentChannel ? currentChannel.name : 'No Channel Selected'})
+            {t('chat.messages')} ({currentChannel ? currentChannel.name : t('chat.noChannelSelected')})
             </div>
             <div className="card-body" style={{ maxHeight: '400px', overflowY: 'auto' }}>
               <ul className="list-unstyled">
@@ -168,14 +184,14 @@ const Chat = () => {
                 <input
                   type="text"
                   className="form-control me-2"
-                  placeholder="Type a message..."
+                  placeholder={t('chat.typeMessage')}
                   value={messageText}
                   onChange={(e) => setMessageText(e.target.value)}
                   disabled={isSending}
                   autoFocus
                 />
                 <button type="submit" className="btn btn-primary" disabled={isSending}>
-                  {isSending ? 'Sending...' : 'Send'}
+                  {isSending ? t('chat.sending') : t('chat.send')}
                 </button>
               </form>
             </div>

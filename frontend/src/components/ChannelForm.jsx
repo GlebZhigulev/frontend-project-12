@@ -3,9 +3,14 @@ import * as Yup from 'yup';
 import { useDispatch, useSelector } from 'react-redux';
 import { addChannel } from './slices/channelsSlice';
 import PropTypes from 'prop-types';
+import { useTranslation } from 'react-i18next';
+import { toast } from 'react-toastify';
+import leoProfanity from 'leo-profanity';
+
 
 const ChannelForm = ({ onClose }) => {
   const dispatch = useDispatch();
+  const { t } = useTranslation();
   const { channels } = useSelector(state => state.channels);
 
   const initialValues = { name: '' };
@@ -14,15 +19,17 @@ const ChannelForm = ({ onClose }) => {
     name: Yup.string()
       .min(3, 'Минимум 3 символа')
       .max(20, 'Максимум 20 символов')
-      .test('unique', 'Имя канала должно быть уникальным', function(value) {
+      .test('unique', t('validation.unique'), function(value) {
         return !channels.some(ch => ch.name === value);
       })
-      .required('Обязательное поле'),
+      .required(t('validation.required')),
   });
 
   const handleSubmit = async (values, { setSubmitting, setErrors }) => {
     try {
-      await dispatch(addChannel(values.name)).unwrap();
+      const cleanName = leoProfanity.clean(values.name);
+      await dispatch(addChannel(cleanName)).unwrap();
+      toast.success(t('notifications.channelCreated'));
       onClose();
     } catch (error) {
       setErrors({ name: error.message || 'Ошибка при добавлении канала' });
@@ -36,7 +43,7 @@ const ChannelForm = ({ onClose }) => {
       <div className="modal-dialog">
         <div className="modal-content">
           <div className="modal-header">
-            <h5 className="modal-title">Добавить канал</h5>
+            <h5 className="modal-title">{t('modals.addChannelTitle')}</h5>
             <button type="button" className="btn-close" onClick={onClose} aria-label="Close"></button>
           </div>
           <Formik initialValues={initialValues} validationSchema={validationSchema} onSubmit={handleSubmit}>
@@ -49,8 +56,8 @@ const ChannelForm = ({ onClose }) => {
                   </div>
                 </div>
                 <div className="modal-footer">
-                  <button type="submit" className="btn btn-primary" disabled={isSubmitting}>Добавить</button>
-                  <button type="button" className="btn btn-secondary" onClick={onClose}>Отмена</button>
+                  <button type="submit" className="btn btn-primary" disabled={isSubmitting}>{t('chat.addChannel')}</button>
+                  <button type="button" className="btn btn-secondary" onClick={onClose}>{t('modals.cancel')}</button>
                 </div>
               </Form>
             )}

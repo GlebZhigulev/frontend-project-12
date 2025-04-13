@@ -5,10 +5,12 @@ import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { setToken } from './slices/authSlice';
+import { useTranslation } from 'react-i18next';
 
 const Signup = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const { t } = useTranslation();
 
   const validationSchema = Yup.object({
     username: Yup.string()
@@ -37,9 +39,9 @@ const Signup = () => {
       navigate('/');
     } catch (error) {
       if (error.response && error.response.status === 409) {
-        setErrors({ username: 'Пользователь с таким именем уже существует' });
+        setErrors({ username: t('signup.userExists') });
       } else {
-        setErrors({ general: 'Ошибка регистрации. Попробуйте позже.' });
+        setErrors({ general: t('errors.default') });
       }
     } finally {
       setSubmitting(false);
@@ -66,22 +68,22 @@ const Signup = () => {
                       <div className="alert alert-danger">{errors.general}</div>
                     )}
                     <div className="mb-3">
-                      <label className="form-label">Имя пользователя:</label>
+                      <label htmlFor="username" className="form-label">{t('signup.username')}                      </label>
                       <Field type="text" name="username" className="form-control" />
                       <ErrorMessage name="username" component="div" className="text-danger mt-1" />
                     </div>
                     <div className="mb-3">
-                      <label className="form-label">Пароль:</label>
+                      <label htmlFor="password" className="form-label">{t('signup.password')}                      </label>
                       <Field type="password" name="password" className="form-control" />
                       <ErrorMessage name="password" component="div" className="text-danger mt-1" />
                     </div>
                     <div className="mb-3">
-                      <label className="form-label">Подтверждение пароля:</label>
+                      <label htmlFor="confirmPassword" className="form-label">{t('signup.confirmPassword')}                      </label>
                       <Field type="password" name="confirmPassword" className="form-control" />
                       <ErrorMessage name="confirmPassword" component="div" className="text-danger mt-1" />
                     </div>
                     <button type="submit" className="btn btn-primary" disabled={isSubmitting}>
-                      Зарегистрироваться
+                    {t('signup.signupBtn')}
                     </button>
                   </Form>
                 )}

@@ -5,10 +5,17 @@ import axios from 'axios';
 import { useDispatch } from 'react-redux';
 import { useNavigate, Link } from 'react-router-dom';
 import { setToken, setError } from './slices/authSlice';
+import { useTranslation } from 'react-i18next';
+import { useSelector } from 'react-redux';
+
+
 
 const Login = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const { t } = useTranslation();
+  const error = useSelector((state) => state.auth.error);
+
 
   const validationSchema = Yup.object({
     username: Yup.string().required('Username is required'),
@@ -21,8 +28,8 @@ const Login = () => {
       const { token } = response.data;
       dispatch(setToken(token));
       navigate('/');
-    } catch (error) {
-      dispatch(setError('Неправильное имя пользователя или пароль'));
+    } catch {
+      dispatch(setError(t('login.invalidCredentials')))
     } finally {
       setSubmitting(false);
     }
@@ -34,7 +41,7 @@ const Login = () => {
         <div className="col-md-6">
           <div className="card">
             <div className="card-header">
-              <h3>Login</h3>
+              <h3>{t('login.title')}</h3>
             </div>
             <div className="card-body">
               <Formik
@@ -43,26 +50,29 @@ const Login = () => {
                 onSubmit={handleSubmit}
               >
                 {({ isSubmitting }) => (
+                  <>
+                  {error && <div className="alert alert-danger">{error}</div>}
                   <Form>
                     <div className="mb-3">
-                      <label className="form-label">Username:</label>
+                      <label htmlFor="username" className="form-label">{t('login.username')}</label>
                       <Field type="text" name="username" className="form-control" />
                       <ErrorMessage name="username" component="div" className="text-danger mt-1" />
                     </div>
                     <div className="mb-3">
-                      <label className="form-label">Password:</label>
+                      <label htmlFor="password" className="form-label">{t('login.password')}</label>
                       <Field type="password" name="password" className="form-control" />
                       <ErrorMessage name="password" component="div" className="text-danger mt-1" />
                     </div>
                     <button type="submit" className="btn btn-primary" disabled={isSubmitting}>
-                      Login
+                      {t('login.loginBtn')}
                     </button>
                   </Form>
+                  </>
                 )}
               </Formik>
               <div className="mt-3">
                 <p>
-                  Нет аккаунта? <Link to="/signup">Зарегистрироваться</Link>
+                {t('login.noAccount')} <Link to="/signup">{t('login.signupLink')}</Link>
                 </p>
               </div>
             </div>

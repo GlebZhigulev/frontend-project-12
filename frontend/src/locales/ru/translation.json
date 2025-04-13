@@ -1,0 +1,55 @@
+{
+    "header": {
+      "title": "Hexlet Chat",
+      "logout": "Выйти",
+      "login": "Войти",
+      "signup": "Регистрация"
+    },
+    "chat": {
+      "channels": "Каналы",
+      "addChannel": "Добавить канал",
+      "messages": "Сообщения",
+      "noChannelSelected": "Канал не выбран",
+      "rename": "Переименовать",
+      "delete": "Удалить",
+      "typeMessage": "Введите сообщение...",
+      "send": "Отправить",
+      "sending" : "Отправка...",
+      "loading": "Загрузка сообщений...",
+      "errorLoading": "Ошибка загрузки чата.",
+      "retry": "Повторить",
+      "offline": "Вы не в сети. Чат недоступен."
+    },
+    "login": {
+      "title": "Вход",
+      "username": "Имя пользователя",
+      "password": "Пароль",
+      "loginBtn": "Войти",
+      "noAccount": "Нет аккаунта?",
+      "signupLink": "Зарегистрироваться",
+      "invalidCredentials": "Неправильное имя пользователя или пароль"
+    },
+    "signup": {
+      "title": "Регистрация",
+      "username": "Имя пользователя",
+      "password": "Пароль",
+      "confirmPassword": "Подтверждение пароля",
+      "signupBtn": "Зарегистрироваться",
+      "userExists": "Пользователь с таким именем уже существует"
+    },
+    "modals": {
+      "addChannelTitle": "Добавить канал",
+      "renameChannelTitle": "Переименовать канал",
+      "deleteChannelTitle": "Удалить канал",
+      "deleteChannelConfirm": "Вы уверены, что хотите удалить канал \"{{channelName}}\"?",
+      "cancel": "Отмена"
+    },
+    "errors": {
+      "default": "Ошибка. Попробуйте позже."
+    },
+    "notifications": {
+      "channelCreated": "Канал создан",
+      "channelRenamed": "Канал переименован",
+      "channelDeleted": "Канал удалён"
+    }
+}
