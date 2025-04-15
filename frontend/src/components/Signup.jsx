@@ -63,7 +63,7 @@ const Signup = () => {
                 onSubmit={handleSubmit}
               >
                 {({ isSubmitting, errors }) => (
-                  <Form>
+                  <Form data-testid="signup-form">
                     {errors.general && (
                       <div className="alert alert-danger">{errors.general}</div>
                     )}
