@@ -23,7 +23,7 @@
     "login": {
       "title": "Вход",
       "username": "Имя пользователя",
-      "password": "Пароль",
+      "password": "Пароль:",
       "loginBtn": "Войти",
       "noAccount": "Нет аккаунта?",
       "signupLink": "Зарегистрироваться",
