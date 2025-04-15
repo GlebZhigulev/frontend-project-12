@@ -14,5 +14,4 @@ const app = async () => {
     </Provider>
   );
 };
-
 app();
