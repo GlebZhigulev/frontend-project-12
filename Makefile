@@ -14,5 +14,5 @@ local-start:
 	make start-backend & make start-frontend
 
 build:
-	rmdir -rf frontend/dist
+	rm-rf frontend/dist
 	npm run build
