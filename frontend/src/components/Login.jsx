@@ -51,28 +51,48 @@ const Login = () => {
               >
                 {({ isSubmitting }) => (
                   <>
-                  {error && <div className="alert alert-danger">{error}</div>}
-                  <Form>
-                    <div className="mb-3">
-                      <label htmlFor="username" className="form-label">{t('login.username')}</label>
-                      <Field type="text" name="username" className="form-control" />
-                      <ErrorMessage name="username" component="div" className="text-danger mt-1" />
-                    </div>
-                    <div className="mb-3">
-                      <label htmlFor="password" className="form-label">{t('login.password')}</label>
-                      <Field type="password" name="password" className="form-control" />
-                      <ErrorMessage name="password" component="div" className="text-danger mt-1" />
-                    </div>
-                    <button type="submit" className="btn btn-primary" disabled={isSubmitting}>
-                      {t('login.loginBtn')}
-                    </button>
-                  </Form>
+                    {error && <div className="alert alert-danger">{error}</div>}
+                    <Form>
+                      <div className="mb-3">
+                        <label htmlFor="username" className="form-label">{t('login.username')}</label>
+                        <Field name="username">
+                          {({ field }) => (
+                            <input
+                              {...field}
+                              id="username"
+                              type="text"
+                              autoComplete="username"
+                              className="form-control"
+                            />
+                          )}
+                        </Field>
+                        <ErrorMessage name="username" component="div" className="text-danger mt-1" />
+                      </div>
+                      <div className="mb-3">
+                        <label htmlFor="password" className="form-label">{t('login.password')}</label>
+                        <Field name="password">
+                          {({ field }) => (
+                            <input
+                              {...field}
+                              id="password"
+                              type="password"
+                              autoComplete="current-password"
+                              className="form-control"
+                            />
+                          )}
+                        </Field>
+                        <ErrorMessage name="password" component="div" className="text-danger mt-1" />
+                      </div>
+                      <button type="submit" className="btn btn-primary" disabled={isSubmitting}>
+                        {t('login.loginBtn')}
+                      </button>
+                    </Form>
                   </>
                 )}
               </Formik>
               <div className="mt-3">
                 <p>
-                {t('login.noAccount')} <Link to="/signup">{t('login.signupLink')}</Link>
+                  {t('login.noAccount')} <Link to="/signup">{t('login.signupLink')}</Link>
                 </p>
               </div>
             </div>
