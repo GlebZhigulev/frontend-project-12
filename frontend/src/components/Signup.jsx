@@ -69,20 +69,52 @@ const Signup = () => {
                     )}
                     <div className="mb-3">
                       <label htmlFor="username" className="form-label">{t('signup.username')}</label>
-                      <Field type="text" name="username" className="form-control" />
+                      <Field name="username">
+                        {({ field }) => (
+                          <input
+                            {...field}
+                            id="username"
+                            type="text"
+                            autoComplete="username"
+                            className="form-control"
+                          />
+                        )}
+                      </Field>
                       <ErrorMessage name="username" component="div" className="text-danger mt-1" />
                     </div>
                     <div className="mb-3">
                       <label htmlFor="password" className="form-label">{t('signup.password')}</label>
-                      <Field type="text" name="password" className="form-control" />
+                      <Field name="password">
+                        {({ field }) => (
+                          <input
+                            {...field}
+                            id="password"
+                            type="password"
+                            autoComplete="new-password"
+                            className="form-control"
+                          />
+                        )}
+                      </Field>
                       <ErrorMessage name="password" component="div" className="text-danger mt-1" />
                     </div>
                     <div className="mb-3">
                       <label htmlFor="confirmPassword" className="form-label">{t('signup.confirmPassword')}</label>
-                      <Field type="text" name="confirmPassword" className="form-control" />
+                      <Field name="confirmPassword">
+                        {({ field }) => (
+                          <input
+                            {...field}
+                            id="confirmPassword"
+                            type="password"
+                            autoComplete="new-password"
+                            className="form-control"
+                          />
+                        )}
+                      </Field>
                       <ErrorMessage name="confirmPassword" component="div" className="text-danger mt-1" />
                     </div>
-                    <button type="submit" className="btn btn-primary" disabled={isSubmitting}>{t('signup.signupBtn')}</button>
+                    <button type="submit" className="btn btn-primary" disabled={isSubmitting}>
+                      {t('signup.signupBtn')}
+                    </button>
                   </Form>
                 )}
               </Formik>
