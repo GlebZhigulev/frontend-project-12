@@ -74,12 +74,12 @@ const Signup = () => {
                     </div>
                     <div className="mb-3">
                       <label htmlFor="password" className="form-label">{t('signup.password')}                      </label>
-                      <Field type="password" name="password" className="form-control" />
+                      <Field type="text" name="password" className="form-control" />
                       <ErrorMessage name="password" component="div" className="text-danger mt-1" />
                     </div>
                     <div className="mb-3">
                       <label htmlFor="confirmPassword" className="form-label">{t('signup.confirmPassword')}                      </label>
-                      <Field type="password" name="confirmPassword" className="form-control" />
+                      <Field type="text" name="confirmPassword" className="form-control" />
                       <ErrorMessage name="confirmPassword" component="div" className="text-danger mt-1" />
                     </div>
                     <button type="submit" className="btn btn-primary" disabled={isSubmitting}>
