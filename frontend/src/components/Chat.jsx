@@ -184,6 +184,7 @@ const Chat = () => {
                   type="text"
                   className="form-control me-2"
                   placeholder={t('chat.typeMessage')}
+                  aria-label={t('chat.newMessage')}
                   value={messageText}
                   onChange={(e) => setMessageText(e.target.value)}
                   disabled={isSending}
