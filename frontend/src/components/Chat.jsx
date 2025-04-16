@@ -148,13 +148,12 @@ const Chat = () => {
               {channels.map((channel) => (
                 <li key={channel.id} className={`list-group-item d-flex justify-content-between align-items-center ${channel.id === currentChannel?.id ? 'active' : ''}`}>
                   <button
+                    aria-label={channel.name}
                     type="button"
                     className="btn btn-link p-0 m-0 text-decoration-none"
                     style={{ color: channel.id === currentChannel?.id ? "#fff" : "#0d6efd" }}
                     onClick={() => dispatch(setCurrentChannel(channel.id))}
-                  >
-                    # {channel.name}
-                  </button>
+                  >#{channel.name}</button>
                   {channel.removable && (
                     <div className="btn-group btn-group-sm">
                       <button className="btn btn-secondary" onClick={() => setRenameChannelData(channel)}>{t('chat.rename')}</button>

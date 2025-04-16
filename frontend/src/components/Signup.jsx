@@ -82,9 +82,7 @@ const Signup = () => {
                       <Field type="text" name="confirmPassword" className="form-control" />
                       <ErrorMessage name="confirmPassword" component="div" className="text-danger mt-1" />
                     </div>
-                    <button type="submit" className="btn btn-primary" disabled={isSubmitting}>
-                    {t('signup.signupBtn')}
-                    </button>
+                    <button type="submit" className="btn btn-primary" disabled={isSubmitting}>{t('signup.signupBtn')}</button>
                   </Form>
                 )}
               </Formik>
