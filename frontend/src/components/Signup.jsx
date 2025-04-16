@@ -68,17 +68,17 @@ const Signup = () => {
                       <div className="alert alert-danger">{errors.general}</div>
                     )}
                     <div className="mb-3">
-                      <label htmlFor="username" className="form-label">{t('signup.username')}                      </label>
+                      <label htmlFor="username" className="form-label">{t('signup.username')}</label>
                       <Field type="text" name="username" className="form-control" />
                       <ErrorMessage name="username" component="div" className="text-danger mt-1" />
                     </div>
                     <div className="mb-3">
-                      <label htmlFor="password" className="form-label">{t('signup.password')}                      </label>
+                      <label htmlFor="password" className="form-label">{t('signup.password')}</label>
                       <Field type="text" name="password" className="form-control" />
                       <ErrorMessage name="password" component="div" className="text-danger mt-1" />
                     </div>
                     <div className="mb-3">
-                      <label htmlFor="confirmPassword" className="form-label">{t('signup.confirmPassword')}                      </label>
+                      <label htmlFor="confirmPassword" className="form-label">{t('signup.confirmPassword')}</label>
                       <Field type="text" name="confirmPassword" className="form-control" />
                       <ErrorMessage name="confirmPassword" component="div" className="text-danger mt-1" />
                     </div>
