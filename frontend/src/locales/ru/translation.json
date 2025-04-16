@@ -39,7 +39,7 @@
     },
     "modals": {
       "addChannelTitle": "Добавить канал",
-      "renameChannelTitle": "Переименовать",
+      "renameChannelTitle": "Управление каналом",
       "deleteChannelTitle": "Удалить",
       "deleteChannelConfirm": "Вы уверены, что хотите удалить канал \"{{channelName}}\"?",
       "cancel": "Отмена"
