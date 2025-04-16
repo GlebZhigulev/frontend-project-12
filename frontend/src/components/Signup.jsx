@@ -18,7 +18,7 @@ const Signup = () => {
       .max(20, 'От 3 до 20 символов')
       .required('Обязательное поле'),
     password: Yup.string()
-      .min(6, 'Минимум 6 символов')
+      .min(6, 'Не менее 6 символов')
       .required('Обязательное поле'),
     confirmPassword: Yup.string()
       .oneOf([Yup.ref('password'), null], 'Пароли должны совпадать')
