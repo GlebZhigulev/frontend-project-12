@@ -7,7 +7,7 @@
     },
     "chat": {
       "channels": "Каналы",
-      "addChannel": "Добавить канал",
+      "addChannel": "+",
       "messages": "Сообщения",
       "noChannelSelected": "Канал не выбран",
       "rename": "Переименовать",
