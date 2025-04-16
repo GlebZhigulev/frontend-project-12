@@ -12,7 +12,7 @@
       "noChannelSelected": "Канал не выбран",
       "rename": "Переименовать",
       "delete": "Удалить",
-      "typeMessage": "Введите сообщение...",
+      "typeMessage": "Введите сообщение",
       "send": "Отправить",
       "sending" : "Отправка...",
       "loading": "Загрузка сообщений...",
@@ -39,13 +39,13 @@
     },
     "modals": {
       "addChannelTitle": "Добавить канал",
-      "renameChannelTitle": "Переименовать канал",
-      "deleteChannelTitle": "Удалить канал",
+      "renameChannelTitle": "Переименовать",
+      "deleteChannelTitle": "Удалить",
       "deleteChannelConfirm": "Вы уверены, что хотите удалить канал \"{{channelName}}\"?",
       "cancel": "Отмена"
     },
     "errors": {
-      "default": "Ошибка. Попробуйте позже."
+      "default": "Ошибка соединения"
     },
     "notifications": {
       "channelCreated": "Канал создан",
