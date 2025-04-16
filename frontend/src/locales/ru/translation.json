@@ -10,7 +10,7 @@
       "addChannel": "+",
       "messages": "Сообщения",
       "noChannelSelected": "Канал не выбран",
-      "rename": "Переименовать",
+      "rename": "Управление каналом",
       "delete": "Удалить",
       "typeMessage": "Новое сообщение",
       "send": "Отправить",
