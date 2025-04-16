@@ -51,13 +51,28 @@ const ChannelForm = ({ onClose }) => {
               <Form>
                 <div className="modal-body">
                   <div className="mb-3">
-                    <Field name="name" autoFocus placeholder="Название канала" className="form-control" />
+                    <label htmlFor="channelName" className="form-label">Имя канала</label>
+                    <Field name="name">
+                      {({ field }) => (
+                        <input
+                          {...field}
+                          id="channelName"
+                          autoFocus
+                          placeholder="Название канала"
+                          className="form-control"
+                        />
+                      )}
+                    </Field>
                     <ErrorMessage name="name" component="div" className="text-danger mt-1" />
                   </div>
                 </div>
                 <div className="modal-footer">
-                  <button type="submit" className="btn btn-primary" disabled={isSubmitting}>{t('chat.addChannel')}</button>
-                  <button type="button" className="btn btn-secondary" onClick={onClose}>{t('modals.cancel')}</button>
+                  <button type="submit" className="btn btn-primary" disabled={isSubmitting}>
+                    {t('chat.addChannel')}
+                  </button>
+                  <button type="button" className="btn btn-secondary" onClick={onClose}>
+                    {t('modals.cancel')}
+                  </button>
                 </div>
               </Form>
             )}
