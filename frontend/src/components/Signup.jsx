@@ -14,8 +14,8 @@ const Signup = () => {
 
   const validationSchema = Yup.object({
     username: Yup.string()
-      .min(3, 'Минимум 3 символа')
-      .max(20, 'Максимум 20 символов')
+      .min(3, 'От 3 до 20 символов')
+      .max(20, 'От 3 до 20 символов')
       .required('Обязательное поле'),
     password: Yup.string()
       .min(6, 'Минимум 6 символов')
