@@ -22,7 +22,7 @@
     },
     "login": {
       "title": "Вход",
-      "username": "Имя пользователя",
+      "username": "Ваш ник",
       "password": "Пароль",
       "loginBtn": "Войти",
       "noAccount": "Нет аккаунта?",
