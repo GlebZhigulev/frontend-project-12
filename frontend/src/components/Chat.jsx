@@ -11,6 +11,7 @@ import DeleteChannelModal from './DeleteChannelModal';
 import { useTranslation } from 'react-i18next';
 import { toast } from 'react-toastify';
 import leoProfanity from 'leo-profanity';
+import ManageChannelModal from './modals/ManageChannelModal'
 
 
 
@@ -28,6 +29,7 @@ const Chat = () => {
   const [showAddChannel, setShowAddChannel] = useState(false);
   const [renameChannelData, setRenameChannelData] = useState(null);
   const [deleteChannelData, setDeleteChannelData] = useState(null);
+  const [manageChannel, setManageChannel] = useState(null);
   
 
   const currentChannel = channels.find(c => c.id === currentChanelId) || channels[0];
@@ -155,10 +157,11 @@ const Chat = () => {
                     onClick={() => dispatch(setCurrentChannel(channel.id))}
                   >{channel.name}</button>
                   {channel.removable && (
-                    <div className="btn-group btn-group-sm">
-                      <button className="btn btn-secondary" onClick={() => setRenameChannelData(channel)}>{t('chat.rename')}</button>
-                      <button className="btn btn-danger" onClick={() => setDeleteChannelData(channel)}>{t('chat.delete')}</button>
-                    </div>
+                    <button
+                      type="button"
+                      className="btn btn-outline-secondary btn-sm"
+                       onClick={() => setManageChannel(channel)}
+                    >{t('chat.manage')}</button>
                   )}
                 </li>
               ))}
@@ -213,6 +216,21 @@ const Chat = () => {
           onClose={() => setDeleteChannelData(null)}
         />
       )}
+      {manageChannel && (
+        <ManageChannelModal
+          channel={manageChannel}
+          onClose={() => setManageChannel(null)}
+          onRename={() => {
+            setRenameChannelData(manageChannel);
+            setManageChannel(null);
+          }}
+          onDelete={() => {
+          setDeleteChannelData(manageChannel);
+          setManageChannel(null);
+    }}
+  />
+)}
+
     </div>
   );
 };

@@ -28,7 +28,7 @@ const DeleteChannelModal = ({ channel, onClose }) => {
             <button type="button" className="btn-close" onClick={onClose} aria-label="Close"></button>
           </div>
           <div className="modal-body">
-            <p>{t('modals.deleteChannelConfirm')} &quot;{channel.name}&quot;?</p>
+            <p>{t('modals.deleteChannelConfirm', { channelName: channel.name })}</p>
           </div>
           <div className="modal-footer">
             <button className="btn btn-danger" onClick={handleDelete}>{t('chat.delete')}</button>
