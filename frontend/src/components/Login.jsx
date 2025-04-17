@@ -1,5 +1,7 @@
 // Login.jsx
-import { Formik, Form, Field, ErrorMessage } from 'formik';
+import {
+  Formik, Form, Field, ErrorMessage,
+} from 'formik';
 import * as Yup from 'yup';
 import axios from 'axios';
 import { useDispatch, useSelector } from 'react-redux';
@@ -7,7 +9,7 @@ import { useNavigate, Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { setToken, setError, setUsername } from './slices/authSlice';
 
-function Login() {
+const Login = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { t } = useTranslation();
@@ -101,7 +103,9 @@ function Login() {
               </Formik>
               <div className="mt-3">
                 <p>
-                  {t('login.noAccount')} <Link to="/signup">{t('login.signupLink')}</Link>
+                  {t('login.noAccount')}
+                  {' '}
+                  <Link to="/signup">{t('login.signupLink')}</Link>
                 </p>
               </div>
             </div>
@@ -110,6 +114,6 @@ function Login() {
       </div>
     </div>
   );
-}
+};
 
 export default Login;

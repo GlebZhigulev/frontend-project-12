@@ -1,15 +1,17 @@
 // App.jsx
-import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-dom';
+import {
+  BrowserRouter as Router, Route, Routes, Navigate,
+} from 'react-router-dom';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { removeToken } from './slices/authSlice';
-import Chat from './Chat.jsx';
-import Login from './Login.jsx';
-import Signup from './Signup.jsx';
-import NotFound from './NotFound.jsx';
-import Header from './Header.jsx';
+import Chat from './Chat';
+import Login from './Login';
+import Signup from './Signup';
+import NotFound from './NotFound';
+import Header from './Header';
 
-function App() {
+const App = () => {
   const dispatch = useDispatch();
   const token = useSelector((state) => state.auth.token);
 
@@ -31,6 +33,6 @@ function App() {
       </Routes>
     </Router>
   );
-}
+};
 
 export default App;

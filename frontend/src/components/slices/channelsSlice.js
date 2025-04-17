@@ -18,7 +18,7 @@ export const addChannel = createAsyncThunk(
     const response = await apiClient.post('/channels', { name });
     dispatch(setCurrentChannel(response.data.id));
     return response.data;
-  }
+  },
 );
 
 export const removeChannel = createAsyncThunk(
@@ -28,7 +28,7 @@ export const removeChannel = createAsyncThunk(
     // Переключаем на дефолтный канал (например, с id = 1) или на первый из списка
     dispatch(setCurrentChannel(1));
     return channelId;
-  }
+  },
 );
 
 export const renameChannel = createAsyncThunk(
@@ -42,7 +42,7 @@ export const renameChannel = createAsyncThunk(
       name: newName,
     });
     return response.data;
-  }
+  },
 );
 
 const channelsSlice = createSlice({

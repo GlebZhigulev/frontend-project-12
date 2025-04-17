@@ -13,7 +13,7 @@ import RenameChannelModal from './RenameChannelModal';
 import DeleteChannelModal from './DeleteChannelModal';
 import ManageChannelModal from './modals/ManageChannelModal';
 
-function Chat() {
+const Chat = () => {
   const dispatch = useDispatch();
   const { t } = useTranslation();
   const { messages, status } = useSelector((state) => state.chat);
@@ -109,20 +109,20 @@ function Chat() {
       }
     } catch (error) {
       console.error('Error sending message:', error);
-      alert('Failed to send message. Please check your network connection.');
     } finally {
       setIsSending(false);
     }
   };
 
-  if (status === 'loading')
+  if (status === 'loading') {
     return (
       <div className="container my-3">
         <div className="alert alert-info">{t('chat.loading')}</div>
       </div>
     );
+  }
 
-  if (status === 'failed')
+  if (status === 'failed') {
     return (
       <div className="container my-3">
         <div className="alert alert-danger">{t('chat.errorLoading')}</div>
@@ -131,6 +131,7 @@ function Chat() {
         </button>
       </div>
     );
+  }
 
   const filteredMessages = messages.filter((m) => m.channelId === currentChannel?.id);
 
@@ -185,14 +186,18 @@ function Chat() {
         <div className="col-md-9">
           <div className="card">
             <div className="card-header">
-              {t('chat.messages')}(
-              {currentChannel ? currentChannel.name : t('chat.noChannelSelected')})
+              {t('chat.messages')}
+              (
+              {currentChannel ? currentChannel.name : t('chat.noChannelSelected')}
+              )
             </div>
             <div className="card-body" style={{ maxHeight: '400px', overflowY: 'auto' }}>
               <ul className="list-unstyled">
                 {filteredMessages.map((message) => (
                   <li key={message.id}>
-                    <strong>{message.username}</strong>: {message.body}
+                    <strong>{message.username}</strong>
+                    :
+                    {message.body}
                   </li>
                 ))}
               </ul>
@@ -245,6 +250,6 @@ function Chat() {
       )}
     </div>
   );
-}
+};
 
 export default Chat;

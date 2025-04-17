@@ -1,4 +1,6 @@
-import { Formik, Form, Field, ErrorMessage } from 'formik';
+import {
+  Formik, Form, Field, ErrorMessage,
+} from 'formik';
 import * as Yup from 'yup';
 import { useDispatch, useSelector } from 'react-redux';
 import PropTypes from 'prop-types';
@@ -7,7 +9,7 @@ import { toast } from 'react-toastify';
 import leoProfanity from 'leo-profanity';
 import { addChannel } from './slices/channelsSlice';
 
-function ChannelForm({ onClose }) {
+const ChannelForm = ({ onClose }) => {
   const dispatch = useDispatch();
   const { t } = useTranslation();
   const { channels } = useSelector((state) => state.channels);
@@ -18,9 +20,7 @@ function ChannelForm({ onClose }) {
     name: Yup.string()
       .min(3, 'От 3 до 20 символов')
       .max(20, 'От 3 до 20 символов')
-      .test('unique', t('validation.unique'), function (value) {
-        return !channels.some((ch) => ch.name === value);
-      })
+      .test('unique', t('validation.unique'), (value) => !channels.some((ch) => ch.name === value))
       .required(t('validation.required')),
   });
 
@@ -54,9 +54,7 @@ function ChannelForm({ onClose }) {
               <Form>
                 <div className="modal-body">
                   <div className="mb-3">
-                    <label htmlFor="channelName" className="form-label">
-                      Имя канала
-                    </label>
+                    <label htmlFor="channelName" className="form-label">Имя канала</label>
                     <Field name="name">
                       {({ field }) => (
                         <input
@@ -86,7 +84,7 @@ function ChannelForm({ onClose }) {
       </div>
     </div>
   );
-}
+};
 
 ChannelForm.propTypes = {
   onClose: PropTypes.func.isRequired,

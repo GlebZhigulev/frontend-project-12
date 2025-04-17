@@ -1,5 +1,7 @@
 // Signup.jsx
-import { Formik, Form, Field, ErrorMessage } from 'formik';
+import {
+  Formik, Form, Field, ErrorMessage,
+} from 'formik';
 import * as Yup from 'yup';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
@@ -7,7 +9,7 @@ import { useDispatch } from 'react-redux';
 import { useTranslation } from 'react-i18next';
 import { setToken, setUsername } from './slices/authSlice';
 
-function Signup() {
+const Signup = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const { t } = useTranslation();
@@ -131,6 +133,6 @@ function Signup() {
       </div>
     </div>
   );
-}
+};
 
 export default Signup;

@@ -1,7 +1,7 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { setCurrentChannel } from './slices/channelsSlice';
 
-function ChannelsList() {
+const ChannelsList = () => {
   const dispatch = useDispatch();
   const { channels, currentChannelId } = useSelector((state) => state.channels);
 
@@ -15,13 +15,15 @@ function ChannelsList() {
               className={channel.id === currentChannelId ? 'active' : ''}
               onClick={() => dispatch(setCurrentChannel(channel.id))}
             >
-              # {channel.name}
+              #
+              {' '}
+              {channel.name}
             </button>
           </li>
         ))}
       </ul>
     </div>
   );
-}
+};
 
 export default ChannelsList;

@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import { useTranslation } from 'react-i18next';
 
-function ManageChannelModal({ channel, onClose, onRename, onDelete }) {
+const ManageChannelModal = ({ onClose, onRename, onDelete }) => {
   const { t } = useTranslation();
 
   return (
@@ -10,7 +10,12 @@ function ManageChannelModal({ channel, onClose, onRename, onDelete }) {
         <div className="modal-content">
           <div className="modal-header">
             <h5 className="modal-title">{t('chat.manage')}</h5>
-            <button type="button" className="btn-close" onClick={onClose} aria-label="Close" />
+            <button
+              type="button"
+              className="btn-close"
+              onClick={onClose}
+              aria-label="Close"
+            />
           </div>
           <div className="modal-body d-flex justify-content-between">
             <button className="btn btn-secondary" onClick={onRename}>
@@ -24,10 +29,9 @@ function ManageChannelModal({ channel, onClose, onRename, onDelete }) {
       </div>
     </div>
   );
-}
+};
 
 ManageChannelModal.propTypes = {
-  channel: PropTypes.object.isRequired,
   onClose: PropTypes.func.isRequired,
   onRename: PropTypes.func.isRequired,
   onDelete: PropTypes.func.isRequired,

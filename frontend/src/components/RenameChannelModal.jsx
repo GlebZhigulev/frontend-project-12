@@ -1,4 +1,6 @@
-import { Formik, Form, Field, ErrorMessage } from 'formik';
+import {
+  Formik, Form, Field, ErrorMessage,
+} from 'formik';
 import * as Yup from 'yup';
 import { useDispatch, useSelector } from 'react-redux';
 import PropTypes from 'prop-types';
@@ -7,7 +9,7 @@ import { toast } from 'react-toastify';
 import leoProfanity from 'leo-profanity';
 import { renameChannel } from './slices/channelsSlice';
 
-function RenameChannelModal({ channel, onClose }) {
+const RenameChannelModal = ({ channel, onClose }) => {
   const dispatch = useDispatch();
   const { t } = useTranslation();
 
@@ -19,9 +21,7 @@ function RenameChannelModal({ channel, onClose }) {
     name: Yup.string()
       .min(3, 'От 3 до 20 символов')
       .max(20, 'От 3 до 20 символов')
-      .test('unique', 'Имя канала должно быть уникальным', function (value) {
-        return !channels.some((ch) => ch.name === value && ch.id !== channel.id);
-      })
+      .test('unique', 'Имя канала должно быть уникальным', (value) => !channels.some((ch) => ch.name === value && ch.id !== channel.id))
       .required(t('validation.required')),
   });
 
@@ -88,7 +88,7 @@ function RenameChannelModal({ channel, onClose }) {
       </div>
     </div>
   );
-}
+};
 
 RenameChannelModal.propTypes = {
   channel: PropTypes.shape({
