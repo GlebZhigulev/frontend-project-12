@@ -4,7 +4,7 @@ import * as Yup from 'yup';
 import axios from 'axios';
 import { useDispatch } from 'react-redux';
 import { useNavigate, Link } from 'react-router-dom';
-import { setToken, setError } from './slices/authSlice';
+import { setToken, setError, setUsername } from './slices/authSlice';
 import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
 
@@ -25,8 +25,9 @@ const Login = () => {
   const handleSubmit = async (values, { setSubmitting }) => {
     try {
       const response = await axios.post('/api/v1/login', values);
-      const { token } = response.data;
+      const { token, username } = response.data;
       dispatch(setToken(token));
+      dispatch(setUsername(username));
       navigate('/');
     } catch {
       dispatch(setError(t('login.invalidCredentials')))

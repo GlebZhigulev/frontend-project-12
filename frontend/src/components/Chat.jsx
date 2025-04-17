@@ -95,6 +95,8 @@ const Chat = () => {
     };
   }, [dispatch]);
 
+  const username = useSelector((state) => state.auth.username);
+
   const handleSendMessage = async (e) => {
     e.preventDefault();
     if (!messageText.trim() || !currentChannel) return;
@@ -103,6 +105,7 @@ const Chat = () => {
       const response = await apiClient.post('/messages', {
         body: leoProfanity.clean(messageText),
         channelId: currentChannel.id,
+        username,
       });
       if (response.data) {
         sentMessages.current.add(response.data.id);

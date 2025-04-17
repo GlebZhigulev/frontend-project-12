@@ -4,7 +4,7 @@ import * as Yup from 'yup';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
-import { setToken } from './slices/authSlice';
+import { setToken, setUsername } from './slices/authSlice';
 import { useTranslation } from 'react-i18next';
 
 const Signup = () => {
@@ -34,8 +34,9 @@ const Signup = () => {
         password: values.password,
       });
       // Предполагаем, что сервер возвращает token при успешной регистрации
-      const { token } = response.data;
+      const { token, username } = response.data;
       dispatch(setToken(token));
+      dispatch(setUsername(username));
       navigate('/');
     } catch (error) {
       if (error.response && error.response.status === 409) {
