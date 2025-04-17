@@ -5,7 +5,7 @@ export const fetchChatData = createAsyncThunk(
   'chat/fetchChatData',
   async (_, { getState, rejectWithValue }) => {
     try {
-      const token = getState().auth.token;
+      const { token } = getState().auth;
 
       // Запрос каналов
       const channelsResponse = await axios.get('/api/v1/channels', {
@@ -37,11 +37,7 @@ const chatSlice = createSlice({
   },
   reducers: {
     addMessage: (state, action) => {
-      if (action.payload) {
-        state.messages.push(action.payload);
-      } else {
-        console.warn('❌ Пустое сообщение пришло в addMessage:', action);
-      }
+      state.messages.push(action.payload);
     },
   },
   extraReducers: (builder) => {
