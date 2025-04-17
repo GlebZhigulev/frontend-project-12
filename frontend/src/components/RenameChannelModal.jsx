@@ -1,17 +1,17 @@
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
 import { useDispatch, useSelector } from 'react-redux';
-import { renameChannel } from './slices/channelsSlice';
 import PropTypes from 'prop-types';
 import { useTranslation } from 'react-i18next';
 import { toast } from 'react-toastify';
 import leoProfanity from 'leo-profanity';
+import { renameChannel } from './slices/channelsSlice';
 
-const RenameChannelModal = ({ channel, onClose }) => {
+function RenameChannelModal({ channel, onClose }) {
   const dispatch = useDispatch();
   const { t } = useTranslation();
 
-  const { channels } = useSelector(state => state.channels);
+  const { channels } = useSelector((state) => state.channels);
 
   const initialValues = { name: channel.name };
 
@@ -19,8 +19,8 @@ const RenameChannelModal = ({ channel, onClose }) => {
     name: Yup.string()
       .min(3, 'От 3 до 20 символов')
       .max(20, 'От 3 до 20 символов')
-      .test('unique', 'Имя канала должно быть уникальным', function(value) {
-        return !channels.some(ch => ch.name === value && ch.id !== channel.id);
+      .test('unique', 'Имя канала должно быть уникальным', function (value) {
+        return !channels.some((ch) => ch.name === value && ch.id !== channel.id);
       })
       .required(t('validation.required')),
   });
@@ -29,7 +29,7 @@ const RenameChannelModal = ({ channel, onClose }) => {
     try {
       const cleanName = leoProfanity.clean(values.name);
       await dispatch(renameChannel({ channelId: channel.id, newName: cleanName })).unwrap();
-      
+
       toast.success(t('notifications.channelRenamed'));
       onClose();
     } catch (error) {
@@ -45,21 +45,20 @@ const RenameChannelModal = ({ channel, onClose }) => {
         <div className="modal-content">
           <div className="modal-header">
             <h5 className="modal-title">{t('modals.renameChannelTitle')}</h5>
-            <button 
-              type="button" 
-              className="btn-close" 
-              onClick={onClose} 
-              aria-label="Close"></button>
+            <button type="button" className="btn-close" onClick={onClose} aria-label="Close" />
           </div>
-          <Formik 
-          initialValues={initialValues} 
-          validationSchema={validationSchema} 
-          onSubmit={handleSubmit}>
+          <Formik
+            initialValues={initialValues}
+            validationSchema={validationSchema}
+            onSubmit={handleSubmit}
+          >
             {({ isSubmitting }) => (
               <Form>
                 <div className="modal-body">
                   <div className="mb-3">
-                    <label htmlFor="channelName" className="form-label">Имя канала</label>
+                    <label htmlFor="channelName" className="form-label">
+                      Имя канала
+                    </label>
                     <Field name="name">
                       {({ field }) => (
                         <input
@@ -89,13 +88,13 @@ const RenameChannelModal = ({ channel, onClose }) => {
       </div>
     </div>
   );
-};
+}
 
 RenameChannelModal.propTypes = {
-    channel: PropTypes.shape({
-      id: PropTypes.oneOfType([PropTypes.number, PropTypes.string]).isRequired,
-      name: PropTypes.string.isRequired,
-    }).isRequired,
-    onClose: PropTypes.func.isRequired,
-  };
+  channel: PropTypes.shape({
+    id: PropTypes.oneOfType([PropTypes.number, PropTypes.string]).isRequired,
+    name: PropTypes.string.isRequired,
+  }).isRequired,
+  onClose: PropTypes.func.isRequired,
+};
 export default RenameChannelModal;

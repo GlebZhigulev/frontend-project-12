@@ -1,16 +1,16 @@
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
 import { useDispatch, useSelector } from 'react-redux';
-import { addChannel } from './slices/channelsSlice';
 import PropTypes from 'prop-types';
 import { useTranslation } from 'react-i18next';
 import { toast } from 'react-toastify';
 import leoProfanity from 'leo-profanity';
+import { addChannel } from './slices/channelsSlice';
 
-const ChannelForm = ({ onClose }) => {
+function ChannelForm({ onClose }) {
   const dispatch = useDispatch();
   const { t } = useTranslation();
-  const { channels } = useSelector(state => state.channels);
+  const { channels } = useSelector((state) => state.channels);
 
   const initialValues = { name: '' };
 
@@ -18,8 +18,8 @@ const ChannelForm = ({ onClose }) => {
     name: Yup.string()
       .min(3, 'От 3 до 20 символов')
       .max(20, 'От 3 до 20 символов')
-      .test('unique', t('validation.unique'), function(value) {
-        return !channels.some(ch => ch.name === value);
+      .test('unique', t('validation.unique'), function (value) {
+        return !channels.some((ch) => ch.name === value);
       })
       .required(t('validation.required')),
   });
@@ -43,21 +43,20 @@ const ChannelForm = ({ onClose }) => {
         <div className="modal-content">
           <div className="modal-header">
             <h5 className="modal-title">{t('modals.addChannelTitle')}</h5>
-            <button 
-              type="button" 
-              className="btn-close" 
-              onClick={onClose} 
-              aria-label="Close"></button>
+            <button type="button" className="btn-close" onClick={onClose} aria-label="Close" />
           </div>
-          <Formik 
-            initialValues={initialValues} 
-            validationSchema={validationSchema} 
-            onSubmit={handleSubmit}>
+          <Formik
+            initialValues={initialValues}
+            validationSchema={validationSchema}
+            onSubmit={handleSubmit}
+          >
             {({ isSubmitting }) => (
               <Form>
                 <div className="modal-body">
                   <div className="mb-3">
-                    <label htmlFor="channelName" className="form-label">Имя канала</label>
+                    <label htmlFor="channelName" className="form-label">
+                      Имя канала
+                    </label>
                     <Field name="name">
                       {({ field }) => (
                         <input
@@ -87,7 +86,7 @@ const ChannelForm = ({ onClose }) => {
       </div>
     </div>
   );
-};
+}
 
 ChannelForm.propTypes = {
   onClose: PropTypes.func.isRequired,

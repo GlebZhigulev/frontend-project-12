@@ -4,10 +4,10 @@ import * as Yup from 'yup';
 import axios from 'axios';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate, Link } from 'react-router-dom';
-import { setToken, setError, setUsername } from './slices/authSlice';
 import { useTranslation } from 'react-i18next';
+import { setToken, setError, setUsername } from './slices/authSlice';
 
-const Login = () => {
+function Login() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { t } = useTranslation();
@@ -51,9 +51,9 @@ const Login = () => {
                     {error && <div className="alert alert-danger">{error}</div>}
                     <Form>
                       <div className="mb-3">
-                        <label 
-                          htmlFor="username" 
-                          className="form-label">{t('login.username')}</label>
+                        <label htmlFor="username" className="form-label">
+                          {t('login.username')}
+                        </label>
                         <Field name="username">
                           {({ field }) => (
                             <input
@@ -65,15 +65,16 @@ const Login = () => {
                             />
                           )}
                         </Field>
-                        <ErrorMessage 
-                          name="username" 
-                          component="div" 
-                          className="text-danger mt-1" />
+                        <ErrorMessage
+                          name="username"
+                          component="div"
+                          className="text-danger mt-1"
+                        />
                       </div>
                       <div className="mb-3">
-                        <label 
-                          htmlFor="password" 
-                          className="form-label">{t('login.password')}</label>
+                        <label htmlFor="password" className="form-label">
+                          {t('login.password')}
+                        </label>
                         <Field name="password">
                           {({ field }) => (
                             <input
@@ -85,8 +86,11 @@ const Login = () => {
                             />
                           )}
                         </Field>
-                        <ErrorMessage 
-                          name="password" component="div" className="text-danger mt-1" />
+                        <ErrorMessage
+                          name="password"
+                          component="div"
+                          className="text-danger mt-1"
+                        />
                       </div>
                       <button type="submit" className="btn btn-primary" disabled={isSubmitting}>
                         {t('login.loginBtn')}
@@ -106,6 +110,6 @@ const Login = () => {
       </div>
     </div>
   );
-};
+}
 
 export default Login;

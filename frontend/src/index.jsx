@@ -8,10 +8,6 @@ const app = async () => {
   const root = ReactDOM.createRoot(document.querySelector('#chat'));
   const initializedApp = await init();
 
-  root.render(
-    <Provider store={store}>
-      {initializedApp}
-    </Provider>
-  );
+  root.render(<Provider store={store}>{initializedApp}</Provider>);
 };
 app();

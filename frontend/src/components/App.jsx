@@ -9,7 +9,7 @@ import Signup from './Signup.jsx';
 import NotFound from './NotFound.jsx';
 import Header from './Header.jsx';
 
-const App = () => {
+function App() {
   const dispatch = useDispatch();
   const token = useSelector((state) => state.auth.token);
 
@@ -24,16 +24,13 @@ const App = () => {
     <Router>
       <Header />
       <Routes>
-        <Route
-          path="/"
-          element={token ? <Chat /> : <Navigate to="/login" replace />}
-        />
+        <Route path="/" element={token ? <Chat /> : <Navigate to="/login" replace />} />
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
     </Router>
   );
-};
+}
 
 export default App;

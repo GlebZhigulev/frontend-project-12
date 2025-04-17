@@ -1,19 +1,19 @@
 import { useEffect, useState, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { io } from 'socket.io-client';
+import { useTranslation } from 'react-i18next';
+import { toast } from 'react-toastify';
+import leoProfanity from 'leo-profanity';
 import { fetchChatData, addMessage } from './slices/chatSlice';
 import { fetchChannels, setCurrentChannel } from './slices/channelsSlice';
-import { io } from 'socket.io-client';
 import apiClient from './tools/apiClient';
 import store from './slices/store';
 import ChannelForm from './ChannelForm';
 import RenameChannelModal from './RenameChannelModal';
 import DeleteChannelModal from './DeleteChannelModal';
-import { useTranslation } from 'react-i18next';
-import { toast } from 'react-toastify';
-import leoProfanity from 'leo-profanity';
 import ManageChannelModal from './modals/ManageChannelModal';
 
-const Chat = () => {
+function Chat() {
   const dispatch = useDispatch();
   const { t } = useTranslation();
   const { messages, status } = useSelector((state) => state.chat);
@@ -22,13 +22,13 @@ const Chat = () => {
   const [isSending, setIsSending] = useState(false);
   const [isOffline, setIsOffline] = useState(!navigator.onLine);
   const sentMessages = useRef(new Set());
-  
+
   const [showAddChannel, setShowAddChannel] = useState(false);
   const [renameChannelData, setRenameChannelData] = useState(null);
   const [deleteChannelData, setDeleteChannelData] = useState(null);
   const [manageChannel, setManageChannel] = useState(null);
 
-  const currentChannel = channels.find(c => c.id === currentChanelId) || channels[0];
+  const currentChannel = channels.find((c) => c.id === currentChanelId) || channels[0];
 
   useEffect(() => {
     dispatch(fetchChatData()).then(() => {
@@ -46,8 +46,8 @@ const Chat = () => {
   useEffect(() => {
     const handleOnline = () => setIsOffline(false);
     const handleOffline = () => {
-    setIsOffline(true);
-    toast.warn(t('chat.offline'));
+      setIsOffline(true);
+      toast.warn(t('chat.offline'));
     };
     window.addEventListener('online', handleOnline);
     window.addEventListener('offline', handleOffline);
@@ -81,7 +81,7 @@ const Chat = () => {
         return;
       }
       const state = store.getState();
-      const isDuplicate = state.chat.messages.some(msg => msg.id === payload.id);
+      const isDuplicate = state.chat.messages.some((msg) => msg.id === payload.id);
       if (!isDuplicate) {
         dispatch(addMessage(payload));
       }
@@ -115,28 +115,30 @@ const Chat = () => {
     }
   };
 
-  if (status === 'loading') return (
-    <div className="container my-3">
-      <div className="alert alert-info">{t('chat.loading')}</div>
-    </div>
-  );
+  if (status === 'loading')
+    return (
+      <div className="container my-3">
+        <div className="alert alert-info">{t('chat.loading')}</div>
+      </div>
+    );
 
-  if (status === 'failed') return (
-    <div className="container my-3">
-      <div className="alert alert-danger">{t('chat.errorLoading')}</div>
-      <button 
-        className="btn btn-primary" 
-        onClick={() => dispatch(fetchChatData())}>{t('chat.retry')}</button>
-    </div>
-  );
+  if (status === 'failed')
+    return (
+      <div className="container my-3">
+        <div className="alert alert-danger">{t('chat.errorLoading')}</div>
+        <button className="btn btn-primary" onClick={() => dispatch(fetchChatData())}>
+          {t('chat.retry')}
+        </button>
+      </div>
+    );
 
-  const filteredMessages = messages.filter(m => m.channelId === currentChannel?.id);
+  const filteredMessages = messages.filter((m) => m.channelId === currentChannel?.id);
 
   return (
     <div className="container-fluid my-3">
       {isOffline && (
         <div className="alert alert-warning" role="alert">
-            {t('chat.offline')}
+          {t('chat.offline')}
         </div>
       )}
       <div className="row">
@@ -145,28 +147,34 @@ const Chat = () => {
           <div className="card">
             <div className="card-header d-flex justify-content-between align-items-center">
               <span>{t('chat.channels')}</span>
-              <button 
-              className="btn btn-sm btn-primary" 
-              onClick={() => setShowAddChannel(true)}>{t('chat.addChannel')}</button>
+              <button className="btn btn-sm btn-primary" onClick={() => setShowAddChannel(true)}>
+                {t('chat.addChannel')}
+              </button>
             </div>
             <ul className="list-group list-group-flush">
               {channels.map((channel) => (
-                <li key={channel.id} 
+                <li
+                  key={channel.id}
                   className={`list-group-item d-flex justify-content-between align-items-center 
-                  ${channel.id === currentChannel?.id ? 'active' : ''}`}>
+                  ${channel.id === currentChannel?.id ? 'active' : ''}`}
+                >
                   <button
                     aria-label={channel.name}
                     type="button"
                     className="btn btn-link p-0 m-0 text-decoration-none"
-                    style={{ color: channel.id === currentChannel?.id ? "#fff" : "#0d6efd" }}
+                    style={{ color: channel.id === currentChannel?.id ? '#fff' : '#0d6efd' }}
                     onClick={() => dispatch(setCurrentChannel(channel.id))}
-                  >{channel.name}</button>
+                  >
+                    {channel.name}
+                  </button>
                   {channel.removable && (
                     <button
                       type="button"
                       className="btn btn-outline-secondary btn-sm"
-                       onClick={() => setManageChannel(channel)}
-                    >{t('chat.manage')}</button>
+                      onClick={() => setManageChannel(channel)}
+                    >
+                      {t('chat.manage')}
+                    </button>
                   )}
                 </li>
               ))}
@@ -177,13 +185,15 @@ const Chat = () => {
         <div className="col-md-9">
           <div className="card">
             <div className="card-header">
-            {t('chat.messages')} 
-            ({currentChannel ? currentChannel.name : t('chat.noChannelSelected')})
+              {t('chat.messages')}(
+              {currentChannel ? currentChannel.name : t('chat.noChannelSelected')})
             </div>
             <div className="card-body" style={{ maxHeight: '400px', overflowY: 'auto' }}>
               <ul className="list-unstyled">
                 {filteredMessages.map((message) => (
-                  <li key={message.id}><strong>{message.username}</strong>: {message.body}</li>
+                  <li key={message.id}>
+                    <strong>{message.username}</strong>: {message.body}
+                  </li>
                 ))}
               </ul>
             </div>
@@ -207,9 +217,7 @@ const Chat = () => {
           </div>
         </div>
       </div>
-      {showAddChannel && (
-        <ChannelForm onClose={() => setShowAddChannel(false)} />
-      )}
+      {showAddChannel && <ChannelForm onClose={() => setShowAddChannel(false)} />}
       {renameChannelData && (
         <RenameChannelModal
           channel={renameChannelData}
@@ -230,14 +238,13 @@ const Chat = () => {
             setManageChannel(null);
           }}
           onDelete={() => {
-          setDeleteChannelData(manageChannel);
-          setManageChannel(null);
-    }}
-  />
-)}
-
+            setDeleteChannelData(manageChannel);
+            setManageChannel(null);
+          }}
+        />
+      )}
     </div>
   );
-};
+}
 
 export default Chat;

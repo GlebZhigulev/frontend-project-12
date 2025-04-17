@@ -4,10 +4,10 @@ import * as Yup from 'yup';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
-import { setToken, setUsername } from './slices/authSlice';
 import { useTranslation } from 'react-i18next';
+import { setToken, setUsername } from './slices/authSlice';
 
-const Signup = () => {
+function Signup() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const { t } = useTranslation();
@@ -17,9 +17,7 @@ const Signup = () => {
       .min(3, 'От 3 до 20 символов')
       .max(20, 'От 3 до 20 символов')
       .required('Обязательное поле'),
-    password: Yup.string()
-      .min(6, 'Не менее 6 символов')
-      .required('Обязательное поле'),
+    password: Yup.string().min(6, 'Не менее 6 символов').required('Обязательное поле'),
     confirmPassword: Yup.string()
       .oneOf([Yup.ref('password'), null], 'Пароли должны совпадать')
       .required('Обязательное поле'),
@@ -65,13 +63,11 @@ const Signup = () => {
               >
                 {({ isSubmitting, errors }) => (
                   <Form data-testid="signup-form">
-                    {errors.general && (
-                      <div className="alert alert-danger">{errors.general}</div>
-                    )}
+                    {errors.general && <div className="alert alert-danger">{errors.general}</div>}
                     <div className="mb-3">
-                      <label 
-                        htmlFor="username" 
-                        className="form-label">{t('signup.username')}</label>
+                      <label htmlFor="username" className="form-label">
+                        {t('signup.username')}
+                      </label>
                       <Field name="username">
                         {({ field }) => (
                           <input
@@ -86,9 +82,9 @@ const Signup = () => {
                       <ErrorMessage name="username" component="div" className="text-danger mt-1" />
                     </div>
                     <div className="mb-3">
-                      <label 
-                        htmlFor="password" 
-                        className="form-label">{t('signup.password')}</label>
+                      <label htmlFor="password" className="form-label">
+                        {t('signup.password')}
+                      </label>
                       <Field name="password">
                         {({ field }) => (
                           <input
@@ -103,9 +99,9 @@ const Signup = () => {
                       <ErrorMessage name="password" component="div" className="text-danger mt-1" />
                     </div>
                     <div className="mb-3">
-                      <label 
-                        htmlFor="confirmPassword" 
-                        className="form-label">{t('signup.confirmPassword')}</label>
+                      <label htmlFor="confirmPassword" className="form-label">
+                        {t('signup.confirmPassword')}
+                      </label>
                       <Field name="confirmPassword">
                         {({ field }) => (
                           <input
@@ -117,10 +113,11 @@ const Signup = () => {
                           />
                         )}
                       </Field>
-                      <ErrorMessage 
-                        name="confirmPassword" 
-                        component="div" 
-                        className="text-danger mt-1" />
+                      <ErrorMessage
+                        name="confirmPassword"
+                        component="div"
+                        className="text-danger mt-1"
+                      />
                     </div>
                     <button type="submit" className="btn btn-primary" disabled={isSubmitting}>
                       {t('signup.signupBtn')}
@@ -134,6 +131,6 @@ const Signup = () => {
       </div>
     </div>
   );
-};
+}
 
 export default Signup;
