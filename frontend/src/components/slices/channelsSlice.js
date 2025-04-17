@@ -1,4 +1,5 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
+
 import apiClient from '../tools/apiClient';
 
 export const fetchChannels = createAsyncThunk('channels/fetchChannels', async () => {
@@ -11,13 +12,13 @@ export const addChannel = createAsyncThunk(
   async (name, { dispatch, getState, rejectWithValue }) => {
     const { channels } = getState().channels;
     // Проверка на уникальность имени
-    if (channels.some(ch => ch.name === name)) {
+    if (channels.some((ch) => ch.name === name)) {
       return rejectWithValue({ message: 'Channel name already exists' });
     }
     const response = await apiClient.post('/channels', { name });
     dispatch(setCurrentChannel(response.data.id));
     return response.data;
-  }
+  },
 );
 
 export const removeChannel = createAsyncThunk(
@@ -27,19 +28,19 @@ export const removeChannel = createAsyncThunk(
     // Переключаем на дефолтный канал (например, с id = 1) или на первый из списка
     dispatch(setCurrentChannel(1));
     return channelId;
-  }
+  },
 );
 
 export const renameChannel = createAsyncThunk(
   'channels/renameChannel',
   async ({ channelId, newName }, { getState, rejectWithValue }) => {
     const { channels } = getState().channels;
-    if (channels.some(ch => ch.name === newName)) {
+    if (channels.some((ch) => ch.name === newName)) {
       return rejectWithValue({ message: 'Channel name already exists' });
     }
     const response = await apiClient.patch(`/channels/${channelId}`, { name: newName });
     return response.data;
-  }
+  },
 );
 
 const channelsSlice = createSlice({
@@ -76,10 +77,10 @@ const channelsSlice = createSlice({
         state.channels.push(action.payload);
       })
       .addCase(removeChannel.fulfilled, (state, action) => {
-        state.channels = state.channels.filter(ch => ch.id !== action.payload);
+        state.channels = state.channels.filter((ch) => ch.id !== action.payload);
       })
       .addCase(renameChannel.fulfilled, (state, action) => {
-        const index = state.channels.findIndex(ch => ch.id === action.payload.id);
+        const index = state.channels.findIndex((ch) => ch.id === action.payload.id);
         if (index !== -1) {
           state.channels[index] = action.payload;
         }

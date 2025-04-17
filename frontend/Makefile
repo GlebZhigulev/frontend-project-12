@@ -8,7 +8,4 @@ build:
 	npm build
 
 lint-fix:
-	NODE_OPTIONS=--import=./eslint.config.js eslint . --fix
-
-lint
-	NODE_OPTIONS=--import=./eslint.config.js eslint .
+	npx cross-env NODE_OPTIONS=--import=./eslint.config.js eslint . --fix
