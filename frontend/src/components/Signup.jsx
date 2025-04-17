@@ -69,7 +69,9 @@ const Signup = () => {
                       <div className="alert alert-danger">{errors.general}</div>
                     )}
                     <div className="mb-3">
-                      <label htmlFor="username" className="form-label">{t('signup.username')}</label>
+                      <label 
+                        htmlFor="username" 
+                        className="form-label">{t('signup.username')}</label>
                       <Field name="username">
                         {({ field }) => (
                           <input
@@ -84,7 +86,9 @@ const Signup = () => {
                       <ErrorMessage name="username" component="div" className="text-danger mt-1" />
                     </div>
                     <div className="mb-3">
-                      <label htmlFor="password" className="form-label">{t('signup.password')}</label>
+                      <label 
+                        htmlFor="password" 
+                        className="form-label">{t('signup.password')}</label>
                       <Field name="password">
                         {({ field }) => (
                           <input
@@ -99,7 +103,9 @@ const Signup = () => {
                       <ErrorMessage name="password" component="div" className="text-danger mt-1" />
                     </div>
                     <div className="mb-3">
-                      <label htmlFor="confirmPassword" className="form-label">{t('signup.confirmPassword')}</label>
+                      <label 
+                        htmlFor="confirmPassword" 
+                        className="form-label">{t('signup.confirmPassword')}</label>
                       <Field name="confirmPassword">
                         {({ field }) => (
                           <input
@@ -111,7 +117,10 @@ const Signup = () => {
                           />
                         )}
                       </Field>
-                      <ErrorMessage name="confirmPassword" component="div" className="text-danger mt-1" />
+                      <ErrorMessage 
+                        name="confirmPassword" 
+                        component="div" 
+                        className="text-danger mt-1" />
                     </div>
                     <button type="submit" className="btn btn-primary" disabled={isSubmitting}>
                       {t('signup.signupBtn')}

@@ -8,7 +8,6 @@ const DeleteChannelModal = ({ channel, onClose }) => {
   const dispatch = useDispatch();
   const { t } = useTranslation();
 
-
   const handleDelete = async () => {
     try {
       await dispatch(removeChannel(channel.id)).unwrap();
@@ -25,7 +24,11 @@ const DeleteChannelModal = ({ channel, onClose }) => {
         <div className="modal-content">
           <div className="modal-header">
             <h5 className="modal-title">{t('modals.deleteChannelTitle')}</h5>
-            <button type="button" className="btn-close" onClick={onClose} aria-label="Close"></button>
+            <button 
+              type="button" 
+              className="btn-close" 
+              onClick={onClose} 
+              aria-label="Close"></button>
           </div>
           <div className="modal-body">
             <p>{t('modals.deleteChannelConfirm', { channelName: channel.name })}</p>

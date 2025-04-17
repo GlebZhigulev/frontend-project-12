@@ -10,7 +10,11 @@ const ManageChannelModal = ({ channel, onClose, onRename, onDelete }) => {
         <div className="modal-content">
           <div className="modal-header">
             <h5 className="modal-title">{t('chat.manage')}</h5>
-            <button type="button" className="btn-close" onClick={onClose} aria-label="Close"></button>
+            <button 
+            type="button" 
+            className="btn-close" 
+            onClick={onClose} 
+            aria-label="Close"></button>
           </div>
           <div className="modal-body d-flex justify-content-between">
             <button className="btn btn-secondary" onClick={onRename}>

@@ -3,8 +3,6 @@ import authReducer from './authSlice';
 import chatReducer from './chatSlice';
 import channelsReducer from './channelsSlice';
 
-
-
 const store = configureStore({
   reducer: {
     auth: authReducer,

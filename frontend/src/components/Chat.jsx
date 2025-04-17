@@ -11,10 +11,7 @@ import DeleteChannelModal from './DeleteChannelModal';
 import { useTranslation } from 'react-i18next';
 import { toast } from 'react-toastify';
 import leoProfanity from 'leo-profanity';
-import ManageChannelModal from './modals/ManageChannelModal'
-
-
-
+import ManageChannelModal from './modals/ManageChannelModal';
 
 const Chat = () => {
   const dispatch = useDispatch();
@@ -30,7 +27,6 @@ const Chat = () => {
   const [renameChannelData, setRenameChannelData] = useState(null);
   const [deleteChannelData, setDeleteChannelData] = useState(null);
   const [manageChannel, setManageChannel] = useState(null);
-  
 
   const currentChannel = channels.find(c => c.id === currentChanelId) || channels[0];
 
@@ -59,7 +55,7 @@ const Chat = () => {
       window.removeEventListener('online', handleOnline);
       window.removeEventListener('offline', handleOffline);
     };
-  }, []);
+  }, [t]);
 
   useEffect(() => {
     let socket = io();
@@ -128,7 +124,9 @@ const Chat = () => {
   if (status === 'failed') return (
     <div className="container my-3">
       <div className="alert alert-danger">{t('chat.errorLoading')}</div>
-      <button className="btn btn-primary" onClick={() => dispatch(fetchChatData())}>{t('chat.retry')}</button>
+      <button 
+        className="btn btn-primary" 
+        onClick={() => dispatch(fetchChatData())}>{t('chat.retry')}</button>
     </div>
   );
 
@@ -147,11 +145,15 @@ const Chat = () => {
           <div className="card">
             <div className="card-header d-flex justify-content-between align-items-center">
               <span>{t('chat.channels')}</span>
-              <button className="btn btn-sm btn-primary" onClick={() => setShowAddChannel(true)}>{t('chat.addChannel')}</button>
+              <button 
+              className="btn btn-sm btn-primary" 
+              onClick={() => setShowAddChannel(true)}>{t('chat.addChannel')}</button>
             </div>
             <ul className="list-group list-group-flush">
               {channels.map((channel) => (
-                <li key={channel.id} className={`list-group-item d-flex justify-content-between align-items-center ${channel.id === currentChannel?.id ? 'active' : ''}`}>
+                <li key={channel.id} 
+                  className={`list-group-item d-flex justify-content-between align-items-center 
+                  ${channel.id === currentChannel?.id ? 'active' : ''}`}>
                   <button
                     aria-label={channel.name}
                     type="button"
@@ -175,7 +177,8 @@ const Chat = () => {
         <div className="col-md-9">
           <div className="card">
             <div className="card-header">
-            {t('chat.messages')} ({currentChannel ? currentChannel.name : t('chat.noChannelSelected')})
+            {t('chat.messages')} 
+            ({currentChannel ? currentChannel.name : t('chat.noChannelSelected')})
             </div>
             <div className="card-body" style={{ maxHeight: '400px', overflowY: 'auto' }}>
               <ul className="list-unstyled">
@@ -221,7 +224,6 @@ const Chat = () => {
       )}
       {manageChannel && (
         <ManageChannelModal
-          channel={manageChannel}
           onClose={() => setManageChannel(null)}
           onRename={() => {
             setRenameChannelData(manageChannel);

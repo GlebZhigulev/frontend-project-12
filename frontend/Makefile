@@ -7,5 +7,8 @@ start:
 build:
 	npm build
 
-lint:
-	npx eslint --ext js,jsx --no-eslintrc --config .eslintrc.yml .
+lint-fix:
+	NODE_OPTIONS=--import=./eslint.config.js eslint . --fix
+
+lint
+	NODE_OPTIONS=--import=./eslint.config.js eslint .

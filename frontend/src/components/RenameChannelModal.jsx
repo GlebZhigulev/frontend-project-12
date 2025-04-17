@@ -7,8 +7,6 @@ import { useTranslation } from 'react-i18next';
 import { toast } from 'react-toastify';
 import leoProfanity from 'leo-profanity';
 
-
-
 const RenameChannelModal = ({ channel, onClose }) => {
   const dispatch = useDispatch();
   const { t } = useTranslation();
@@ -47,9 +45,16 @@ const RenameChannelModal = ({ channel, onClose }) => {
         <div className="modal-content">
           <div className="modal-header">
             <h5 className="modal-title">{t('modals.renameChannelTitle')}</h5>
-            <button type="button" className="btn-close" onClick={onClose} aria-label="Close"></button>
+            <button 
+              type="button" 
+              className="btn-close" 
+              onClick={onClose} 
+              aria-label="Close"></button>
           </div>
-          <Formik initialValues={initialValues} validationSchema={validationSchema} onSubmit={handleSubmit}>
+          <Formik 
+          initialValues={initialValues} 
+          validationSchema={validationSchema} 
+          onSubmit={handleSubmit}>
             {({ isSubmitting }) => (
               <Form>
                 <div className="modal-body">

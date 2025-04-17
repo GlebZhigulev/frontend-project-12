@@ -4,7 +4,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import { removeToken } from './slices/authSlice';
 import { useTranslation } from 'react-i18next';
 
-
 const Header = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();

@@ -6,7 +6,6 @@ import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import leoProfanity from 'leo-profanity';
 
-
 const init = async () => {
   const i18n = i18next.createInstance();
   leoProfanity.loadDictionary('ru');

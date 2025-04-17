@@ -27,8 +27,6 @@ export const fetchChatData = createAsyncThunk(
   }
 );
 
-  
-
 const chatSlice = createSlice({
     name: 'chat',
     initialState: {
