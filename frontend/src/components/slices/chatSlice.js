@@ -24,7 +24,7 @@ export const fetchChatData = createAsyncThunk(
     } catch (error) {
       return rejectWithValue(error.response.data);
     }
-  },
+  }
 );
 
 const chatSlice = createSlice({

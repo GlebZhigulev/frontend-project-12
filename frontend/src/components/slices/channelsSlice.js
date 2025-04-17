@@ -2,13 +2,10 @@ import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 
 import apiClient from '../tools/apiClient';
 
-export const fetchChannels = createAsyncThunk(
-  'channels/fetchChannels',
-  async () => {
-    const response = await apiClient.get('/channels');
-    return response.data;
-  },
-);
+export const fetchChannels = createAsyncThunk('channels/fetchChannels', async () => {
+  const response = await apiClient.get('/channels');
+  return response.data;
+});
 
 export const addChannel = createAsyncThunk(
   'channels/addChannel',
@@ -21,7 +18,7 @@ export const addChannel = createAsyncThunk(
     const response = await apiClient.post('/channels', { name });
     dispatch(setCurrentChannel(response.data.id));
     return response.data;
-  },
+  }
 );
 
 export const removeChannel = createAsyncThunk(
@@ -31,7 +28,7 @@ export const removeChannel = createAsyncThunk(
     // Переключаем на дефолтный канал (например, с id = 1) или на первый из списка
     dispatch(setCurrentChannel(1));
     return channelId;
-  },
+  }
 );
 
 export const renameChannel = createAsyncThunk(
@@ -45,7 +42,7 @@ export const renameChannel = createAsyncThunk(
       name: newName,
     });
     return response.data;
-  },
+  }
 );
 
 const channelsSlice = createSlice({
@@ -82,14 +79,10 @@ const channelsSlice = createSlice({
         state.channels.push(action.payload);
       })
       .addCase(removeChannel.fulfilled, (state, action) => {
-        state.channels = state.channels.filter(
-          (ch) => ch.id !== action.payload,
-        );
+        state.channels = state.channels.filter((ch) => ch.id !== action.payload);
       })
       .addCase(renameChannel.fulfilled, (state, action) => {
-        const index = state.channels.findIndex(
-          (ch) => ch.id === action.payload.id,
-        );
+        const index = state.channels.findIndex((ch) => ch.id === action.payload.id);
         if (index !== -1) {
           state.channels[index] = action.payload;
         }
