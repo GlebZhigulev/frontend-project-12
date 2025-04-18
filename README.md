@@ -36,7 +36,9 @@
 
 ```bash
 make install
+```
 
 ## 🧪 Запуск проекта
 ```bash
 make install
+```
