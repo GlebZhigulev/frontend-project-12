@@ -11,7 +11,7 @@ import Signup from './Signup';
 import NotFound from './NotFound';
 import Header from './Header';
 
-function App() {
+const App = () => {
   const dispatch = useDispatch();
   const token = useSelector((state) => state.auth.token);
 
@@ -33,6 +33,6 @@ function App() {
       </Routes>
     </Router>
   );
-}
+};
 
 export default App;
