@@ -13,7 +13,7 @@ import RenameChannelModal from './RenameChannelModal';
 import DeleteChannelModal from './DeleteChannelModal';
 import ManageChannelModal from './modals/ManageChannelModal';
 
-const Chat = () => {
+function Chat() {
   const dispatch = useDispatch();
   const { t } = useTranslation();
   const { messages, status } = useSelector((state) => state.chat);
@@ -250,6 +250,6 @@ const Chat = () => {
       )}
     </div>
   );
-};
+}
 
 export default Chat;

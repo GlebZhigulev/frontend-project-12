@@ -9,7 +9,7 @@ import { useNavigate, Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { setToken, setError, setUsername } from './slices/authSlice';
 
-const Login = () => {
+function Login() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { t } = useTranslation();
@@ -114,6 +114,6 @@ const Login = () => {
       </div>
     </div>
   );
-};
+}
 
 export default Login;

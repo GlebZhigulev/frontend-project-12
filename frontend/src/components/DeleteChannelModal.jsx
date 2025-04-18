@@ -4,7 +4,7 @@ import { useTranslation } from 'react-i18next';
 import { toast } from 'react-toastify';
 import { removeChannel } from './slices/channelsSlice';
 
-const DeleteChannelModal = ({ channel, onClose }) => {
+function DeleteChannelModal({ channel, onClose }) {
   const dispatch = useDispatch();
   const { t } = useTranslation();
 
@@ -33,7 +33,7 @@ const DeleteChannelModal = ({ channel, onClose }) => {
             <button className="btn btn-danger" onClick={handleDelete}>
               {t('chat.delete')}
             </button>
-            <button className="btn btn-secondary" onClick={onClose}>
+            <button type="button" className="btn btn-secondary" onClick={onClose}>
               {t('modals.cancel')}
             </button>
           </div>
@@ -41,7 +41,7 @@ const DeleteChannelModal = ({ channel, onClose }) => {
       </div>
     </div>
   );
-};
+}
 
 DeleteChannelModal.propTypes = {
   channel: PropTypes.shape({

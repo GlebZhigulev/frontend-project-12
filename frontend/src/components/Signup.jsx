@@ -9,7 +9,7 @@ import { useDispatch } from 'react-redux';
 import { useTranslation } from 'react-i18next';
 import { setToken, setUsername } from './slices/authSlice';
 
-const Signup = () => {
+function Signup() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const { t } = useTranslation();
@@ -133,6 +133,6 @@ const Signup = () => {
       </div>
     </div>
   );
-};
+}
 
 export default Signup;

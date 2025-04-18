@@ -9,7 +9,7 @@ import { toast } from 'react-toastify';
 import leoProfanity from 'leo-profanity';
 import { renameChannel } from './slices/channelsSlice';
 
-const RenameChannelModal = ({ channel, onClose }) => {
+function RenameChannelModal({ channel, onClose }) {
   const dispatch = useDispatch();
   const { t } = useTranslation();
 
@@ -88,7 +88,7 @@ const RenameChannelModal = ({ channel, onClose }) => {
       </div>
     </div>
   );
-};
+}
 
 RenameChannelModal.propTypes = {
   channel: PropTypes.shape({

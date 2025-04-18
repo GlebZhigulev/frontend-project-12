@@ -1,7 +1,7 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { setCurrentChannel } from './slices/channelsSlice';
 
-const ChannelsList = () => {
+function ChannelsList() {
   const dispatch = useDispatch();
   const { channels, currentChannelId } = useSelector((state) => state.channels);
 
@@ -24,6 +24,6 @@ const ChannelsList = () => {
       </ul>
     </div>
   );
-};
+}
 
 export default ChannelsList;

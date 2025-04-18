@@ -9,7 +9,7 @@ import { toast } from 'react-toastify';
 import leoProfanity from 'leo-profanity';
 import { addChannel } from './slices/channelsSlice';
 
-const ChannelForm = ({ onClose }) => {
+function ChannelForm({ onClose }) {
   const dispatch = useDispatch();
   const { t } = useTranslation();
   const { channels } = useSelector((state) => state.channels);
@@ -84,7 +84,7 @@ const ChannelForm = ({ onClose }) => {
       </div>
     </div>
   );
-};
+}
 
 ChannelForm.propTypes = {
   onClose: PropTypes.func.isRequired,

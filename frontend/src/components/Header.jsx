@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useTranslation } from 'react-i18next';
 import { removeToken } from './slices/authSlice';
 
-const Header = () => {
+function Header() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { t } = useTranslation();
@@ -45,6 +45,6 @@ const Header = () => {
       </div>
     </nav>
   );
-};
+}
 
 export default Header;
