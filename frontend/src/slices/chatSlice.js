@@ -4,7 +4,7 @@ import apiClient from '../tools/apiClient';
 
 export const fetchChatData = createAsyncThunk(
   'chat/fetchChatData',
-  async (_, { getState, rejectWithValue }) => {
+  async (_, { rejectWithValue }) => {
     try {
       const channelsResponse = await apiClient.get('/channels');
       const messagesResponse = await apiClient.get('/messages');
