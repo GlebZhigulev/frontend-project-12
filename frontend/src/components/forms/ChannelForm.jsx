@@ -54,17 +54,22 @@ function ChannelForm({ onClose }) {
               <Form>
                 <div className="modal-body">
                   <div className="mb-3">
-                    <label htmlFor="channelName" className="form-label">Имя канала</label>
-                    <Field name="name">
-                      {({ field }) => (
-                        <input
-                          {...field}
-                          id="channelName"
-                          placeholder="Название канала"
-                          className="form-control"
-                        />
-                      )}
-                    </Field>
+                    <label className="form-label" htmlFor="channelName">
+                      Имя канала
+                      <Field name="name">
+                        {({ field }) => (
+                          <input
+                            id="channelName"
+                            name={field.name}
+                            value={field.value}
+                            onChange={field.onChange}
+                            onBlur={field.onBlur}
+                            placeholder="Название канала"
+                            className="form-control"
+                          />
+                        )}
+                      </Field>
+                    </label>
                     <ErrorMessage name="name" component="div" className="text-danger mt-1" />
                   </div>
                 </div>
