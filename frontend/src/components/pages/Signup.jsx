@@ -1,10 +1,10 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import apiClient from '../tools/apiClient';
 import { useTranslation } from 'react-i18next';
-import { setToken, setUsername } from '../slices/authSlice';
+import { setToken, setUsername } from '../../slices/authSlice';
 import SignupForm from '../forms/SignupForm';
+import apiClient from '../../tools/apiClient';
 
 const Signup = () => {
   const dispatch = useDispatch();

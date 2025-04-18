@@ -4,7 +4,7 @@ import {
 } from 'react-router-dom';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { removeToken } from './slices/authSlice';
+import { removeToken } from '../slices/authSlice';
 import Chat from './pages/Chat';
 import Login from './pages/Login';
 import Signup from './pages/Signup';

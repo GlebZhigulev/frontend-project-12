@@ -7,7 +7,7 @@ import PropTypes from 'prop-types';
 import { useTranslation } from 'react-i18next';
 import { toast } from 'react-toastify';
 import leoProfanity from 'leo-profanity';
-import { addChannel } from '../slices/channelsSlice';
+import { addChannel } from '../../slices/channelsSlice';
 
 const ChannelForm = ({ onClose }) => {
   const dispatch = useDispatch();

@@ -3,7 +3,7 @@ import { useSelector } from 'react-redux';
 import { useTranslation } from 'react-i18next';
 import { toast } from 'react-toastify';
 import leoProfanity from 'leo-profanity';
-import apiClient from '../tools/apiClient';
+import apiClient from '../../tools/apiClient';
 
 const MessageWindow = () => {
   const { t } = useTranslation();

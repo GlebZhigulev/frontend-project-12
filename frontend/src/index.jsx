@@ -1,6 +1,6 @@
 import ReactDOM from 'react-dom/client';
 import { Provider } from 'react-redux';
-import store from './components/slices/store'; // путь к store.js
+import store from './slices/store'; // путь к store.js
 import init from './init';
 import 'bootstrap/dist/css/bootstrap.min.css';
 

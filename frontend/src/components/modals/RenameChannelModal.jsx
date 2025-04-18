@@ -7,7 +7,7 @@ import PropTypes from 'prop-types';
 import { useTranslation } from 'react-i18next';
 import { toast } from 'react-toastify';
 import leoProfanity from 'leo-profanity';
-import { renameChannel } from '../slices/channelsSlice';
+import { renameChannel } from '../../slices/channelsSlice';
 
 const RenameChannelModal = ({ channel, onClose }) => {
   const dispatch = useDispatch();

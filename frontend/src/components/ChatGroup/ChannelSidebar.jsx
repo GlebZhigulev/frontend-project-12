@@ -1,7 +1,7 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useTranslation } from 'react-i18next';
-import { setCurrentChannel } from '../slices/channelsSlice';
+import { setCurrentChannel } from '../../slices/channelsSlice';
 
 const ChannelSidebar = ({ onAddChannel, onManageChannel }) => {
   const dispatch = useDispatch();

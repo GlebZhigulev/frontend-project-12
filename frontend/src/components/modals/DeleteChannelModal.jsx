@@ -2,7 +2,7 @@ import { useDispatch } from 'react-redux';
 import PropTypes from 'prop-types';
 import { useTranslation } from 'react-i18next';
 import { toast } from 'react-toastify';
-import { removeChannel } from '../slices/channelsSlice';
+import { removeChannel } from '../../slices/channelsSlice';
 
 const DeleteChannelModal = ({ channel, onClose }) => {
   const dispatch = useDispatch();
