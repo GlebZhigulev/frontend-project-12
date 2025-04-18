@@ -7,7 +7,7 @@ export const fetchChatData = createAsyncThunk(
   async (_, { getState, rejectWithValue }) => {
     try {
       const channelsResponse = await apiClient.get('/channels');
-      const messagesResponse = apiClient.get('/messages');
+      const messagesResponse = await apiClient.get('/messages');
       return {
         channels: channelsResponse.data,
         messages: messagesResponse.data,
