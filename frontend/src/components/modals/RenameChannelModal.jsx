@@ -64,7 +64,6 @@ function RenameChannelModal({ channel, onClose }) {
                         <input
                           {...field}
                           id="channelName"
-                          autoFocus
                           placeholder="Новое название канала"
                           className="form-control"
                         />

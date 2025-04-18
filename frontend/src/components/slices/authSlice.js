@@ -1,3 +1,4 @@
+// src/components/slices/authSlice.js
 import { createSlice } from '@reduxjs/toolkit';
 
 const authSlice = createSlice({
@@ -8,25 +9,43 @@ const authSlice = createSlice({
     error: null,
   },
   reducers: {
-    setToken: (state, action) => {
-      state.token = action.payload;
+    setToken(state, action) {
+      // сайд‑эффект — пишем в localStorage
       localStorage.setItem('token', action.payload);
+      // возвращаем новый state
+      return {
+        ...state,
+        token: action.payload,
+      };
     },
-    setUsername: (state, action) => {
-      state.username = action.payload;
+    setUsername(state, action) {
       localStorage.setItem('username', action.payload);
+      return {
+        ...state,
+        username: action.payload,
+      };
     },
-    removeToken: (state) => {
-      state.token = null;
+    removeToken(state) {
       localStorage.removeItem('token');
+      return {
+        ...state,
+        token: null,
+      };
     },
-    setError: (state, action) => {
-      state.error = action.payload;
+    setError(state, action) {
+      return {
+        ...state,
+        error: action.payload,
+      };
     },
   },
 });
 
 export const {
-  setToken, removeToken, setError, setUsername,
+  setToken,
+  setUsername,
+  removeToken,
+  setError,
 } = authSlice.actions;
+
 export default authSlice.reducer;
