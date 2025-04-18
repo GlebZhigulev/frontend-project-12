@@ -14,7 +14,7 @@ const DeleteChannelModal = ({ channel, onClose }) => {
       toast.success(t('notifications.channelDeleted'));
       onClose();
     } catch {
-      alert('Ошибка при удалении канала');
+      toast.error(t('notifications.channelNotDeleted'));
     }
   };
 

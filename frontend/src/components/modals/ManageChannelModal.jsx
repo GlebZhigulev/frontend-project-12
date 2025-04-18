@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import { useTranslation } from 'react-i18next';
 
-function ManageChannelModal({ onClose, onRename, onDelete }) {
+const ManageChannelModal = ({ onClose, onRename, onDelete }) => {
   const { t } = useTranslation();
 
   return (
@@ -29,7 +29,7 @@ function ManageChannelModal({ onClose, onRename, onDelete }) {
       </div>
     </div>
   );
-}
+};
 
 ManageChannelModal.propTypes = {
   onClose: PropTypes.func.isRequired,

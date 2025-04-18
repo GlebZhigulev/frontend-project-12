@@ -51,7 +51,8 @@
     "notifications": {
       "channelCreated": "Канал создан",
       "channelRenamed": "Канал переименован",
-      "channelDeleted": "Канал удалён"
+      "channelDeleted": "Канал удалён",
+      "channelNotDeleted": "Ошибка удаления канала"
     },
     "validation": {
       "required" : "Обязательное поле"
