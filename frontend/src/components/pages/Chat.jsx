@@ -6,7 +6,7 @@ import { toast } from 'react-toastify';
 import { fetchChatData } from '../../slices/chatSlice';
 import { fetchChannels } from '../../slices/channelsSlice';
 import store from '../../slices/store';
-import ChannelForm from '../forms/ChannelForm';
+import ChannelForm from '../modals/AddChannelModal';
 import RenameChannelModal from '../modals/RenameChannelModal';
 import DeleteChannelModal from '../modals/DeleteChannelModal';
 import ManageChannelModal from '../modals/ManageChannelModal';

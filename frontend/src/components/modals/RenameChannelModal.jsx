@@ -67,7 +67,7 @@ const RenameChannelModal = ({ channel, onClose }) => {
                             onChange={field.onChange}
                             onBlur={field.onBlur}
                             placeholder="Новое название канала"
-                            className="form-control"
+                            className="form-control d-block w-100"
                           />
                         )}
                       </Field>

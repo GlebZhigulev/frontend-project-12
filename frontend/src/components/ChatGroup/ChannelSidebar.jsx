@@ -41,7 +41,7 @@ const ChannelSidebar = ({ onAddChannel, onManageChannel }) => {
               {channel.removable && (
                 <button
                   type="button"
-                  className="btn btn-outline-secondary btn-sm"
+                  className="btn btn-outline-dark btn-light"
                   onClick={() => onManageChannel(channel)}
                 >
                   {t('chat.manage')}

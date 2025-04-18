@@ -65,7 +65,7 @@ const ChannelForm = ({ onClose }) => {
                             onChange={field.onChange}
                             onBlur={field.onBlur}
                             placeholder="Название канала"
-                            className="form-control"
+                            className="form-control d-block w-100"
                           />
                         )}
                       </Field>
