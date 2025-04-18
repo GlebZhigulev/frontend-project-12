@@ -5,13 +5,13 @@ import {
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { removeToken } from './slices/authSlice';
-import Chat from './Chat';
-import Login from './Login';
-import Signup from './Signup';
-import NotFound from './NotFound';
+import Chat from './pages/Chat';
+import Login from './pages/Login';
+import Signup from './pages/Signup';
+import NotFound from './pages/NotFound';
 import Header from './Header';
 
-const App = () => {
+function App() {
   const dispatch = useDispatch();
   const token = useSelector((state) => state.auth.token);
 
@@ -33,6 +33,6 @@ const App = () => {
       </Routes>
     </Router>
   );
-};
+}
 
 export default App;

@@ -18,10 +18,10 @@ function ManageChannelModal({ onClose, onRename, onDelete }) {
             />
           </div>
           <div className="modal-body d-flex justify-content-between">
-            <button className="btn btn-secondary" onClick={onRename}>
+            <button type="button" className="btn btn-secondary" onClick={onRename}>
               {t('chat.rename')}
             </button>
-            <button className="btn btn-danger" onClick={onDelete}>
+            <button type="button" className="btn btn-danger" onClick={onDelete}>
               {t('chat.delete')}
             </button>
           </div>

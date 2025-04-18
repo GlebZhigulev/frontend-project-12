@@ -52,5 +52,8 @@
       "channelCreated": "Канал создан",
       "channelRenamed": "Канал переименован",
       "channelDeleted": "Канал удалён"
+    },
+    "validation": {
+      "required" : "Обязательное поле"
     }
 }

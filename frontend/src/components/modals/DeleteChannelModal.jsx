@@ -2,7 +2,7 @@ import { useDispatch } from 'react-redux';
 import PropTypes from 'prop-types';
 import { useTranslation } from 'react-i18next';
 import { toast } from 'react-toastify';
-import { removeChannel } from './slices/channelsSlice';
+import { removeChannel } from '../slices/channelsSlice';
 
 function DeleteChannelModal({ channel, onClose }) {
   const dispatch = useDispatch();
@@ -30,7 +30,7 @@ function DeleteChannelModal({ channel, onClose }) {
             <p>{t('modals.deleteChannelConfirm', { channelName: channel.name })}</p>
           </div>
           <div className="modal-footer">
-            <button className="btn btn-danger" onClick={handleDelete}>
+            <button type="button" className="btn btn-danger" onClick={handleDelete}>
               {t('chat.delete')}
             </button>
             <button type="button" className="btn btn-secondary" onClick={onClose}>
