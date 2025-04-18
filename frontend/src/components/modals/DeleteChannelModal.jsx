@@ -4,7 +4,7 @@ import { useTranslation } from 'react-i18next';
 import { toast } from 'react-toastify';
 import { removeChannel } from '../slices/channelsSlice';
 
-function DeleteChannelModal({ channel, onClose }) {
+const DeleteChannelModal = ({ channel, onClose }) => {
   const dispatch = useDispatch();
   const { t } = useTranslation();
 
@@ -41,7 +41,7 @@ function DeleteChannelModal({ channel, onClose }) {
       </div>
     </div>
   );
-}
+};
 
 DeleteChannelModal.propTypes = {
   channel: PropTypes.shape({

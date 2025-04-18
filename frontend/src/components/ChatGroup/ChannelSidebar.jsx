@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useTranslation } from 'react-i18next';
 import { setCurrentChannel } from '../slices/channelsSlice';
 
-function ChannelSidebar({ onAddChannel, onManageChannel }) {
+const ChannelSidebar = ({ onAddChannel, onManageChannel }) => {
   const dispatch = useDispatch();
   const { t } = useTranslation();
   const { channels, currentChanelId } = useSelector((state) => state.channels);
@@ -25,7 +25,10 @@ function ChannelSidebar({ onAddChannel, onManageChannel }) {
           {channels.map((channel) => (
             <li
               key={channel.id}
-              className={`list-group-item d-flex justify-content-between align-items-center ${channel.id === currentChanelId ? 'active' : ''}`}
+              className={
+                `list-group-item d-flex justify-content-between align-items-center 
+                ${channel.id === currentChanelId ? 'active' : ''}`
+              }
             >
               <button
                 type="button"
@@ -50,6 +53,6 @@ function ChannelSidebar({ onAddChannel, onManageChannel }) {
       </div>
     </div>
   );
-}
+};
 
 export default ChannelSidebar;

@@ -11,13 +11,13 @@ import Signup from './pages/Signup';
 import NotFound from './pages/NotFound';
 import Header from './Header';
 
-function App() {
+const App = () => {
   const dispatch = useDispatch();
   const token = useSelector((state) => state.auth.token);
 
   useEffect(() => {
-    const token = localStorage.getItem('token');
-    if (!token) {
+    const localToken = localStorage.getItem('token');
+    if (!localToken) {
       dispatch(removeToken());
     }
   }, [dispatch]);
@@ -33,6 +33,6 @@ function App() {
       </Routes>
     </Router>
   );
-}
+};
 
 export default App;

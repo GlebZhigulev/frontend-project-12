@@ -6,7 +6,7 @@ import * as Yup from 'yup';
 import PropTypes from 'prop-types';
 import { useTranslation } from 'react-i18next';
 
-function LoginForm({ onSubmit, error }) {
+const LoginForm = ({ onSubmit, error }) => {
   const { t } = useTranslation();
 
   const initialValues = { username: '', password: '' };
@@ -52,7 +52,7 @@ function LoginForm({ onSubmit, error }) {
       )}
     </Formik>
   );
-}
+};
 
 LoginForm.propTypes = {
   onSubmit: PropTypes.func.isRequired,

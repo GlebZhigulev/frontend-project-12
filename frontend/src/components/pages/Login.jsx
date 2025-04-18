@@ -6,7 +6,7 @@ import { useTranslation } from 'react-i18next';
 import { setToken, setError, setUsername } from '../slices/authSlice';
 import LoginForm from '../forms/LoginForm';
 
-function Login() {
+const Login = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { t } = useTranslation();
@@ -48,6 +48,6 @@ function Login() {
       </div>
     </div>
   );
-}
+};
 
 export default Login;

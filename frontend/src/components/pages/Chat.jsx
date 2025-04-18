@@ -13,7 +13,7 @@ import ManageChannelModal from '../modals/ManageChannelModal';
 import ChannelSidebar from '../ChatGroup/ChannelSidebar';
 import MessageWindow from '../ChatGroup/MessageWindow';
 
-function Chat() {
+const Chat = () => {
   const dispatch = useDispatch();
   const { t } = useTranslation();
   const [isOffline, setIsOffline] = useState(!navigator.onLine);
@@ -100,6 +100,6 @@ function Chat() {
       )}
     </div>
   );
-}
+};
 
 export default Chat;

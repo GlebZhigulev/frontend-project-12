@@ -6,7 +6,7 @@ import * as Yup from 'yup';
 import PropTypes from 'prop-types';
 import { useTranslation } from 'react-i18next';
 
-function SignupForm({ onSubmit }) {
+const SignupForm = ({ onSubmit }) => {
   const { t } = useTranslation();
 
   const initialValues = { username: '', password: '', confirmPassword: '' };
@@ -77,7 +77,7 @@ function SignupForm({ onSubmit }) {
       )}
     </Formik>
   );
-}
+};
 
 SignupForm.propTypes = {
   onSubmit: PropTypes.func.isRequired,

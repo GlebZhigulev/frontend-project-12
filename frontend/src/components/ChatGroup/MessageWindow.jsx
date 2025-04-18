@@ -5,7 +5,7 @@ import { toast } from 'react-toastify';
 import leoProfanity from 'leo-profanity';
 import apiClient from '../tools/apiClient';
 
-function MessageWindow() {
+const MessageWindow = () => {
   const { t } = useTranslation();
   const { messages } = useSelector((state) => state.chat);
   const { channels, currentChanelId } = useSelector((state) => state.channels);
@@ -80,6 +80,6 @@ function MessageWindow() {
       </div>
     </div>
   );
-}
+};
 
 export default MessageWindow;
