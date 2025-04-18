@@ -1,7 +1,7 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import axios from 'axios';
+import apiClient from '../tools/apiClient';
 import { useTranslation } from 'react-i18next';
 import { setToken, setUsername } from '../slices/authSlice';
 import SignupForm from '../forms/SignupForm';
@@ -13,7 +13,7 @@ const Signup = () => {
 
   const handleSubmit = async (values, { setSubmitting, setErrors }) => {
     try {
-      const response = await axios.post('/api/v1/signup', {
+      const response = await apiClient.post('/signup', {
         username: values.username,
         password: values.password,
       });

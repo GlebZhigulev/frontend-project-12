@@ -1,7 +1,7 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate, Link } from 'react-router-dom';
-import axios from 'axios';
+import apiClient from '../tools/apiClient';
 import { useTranslation } from 'react-i18next';
 import { setToken, setError, setUsername } from '../slices/authSlice';
 import LoginForm from '../forms/LoginForm';
@@ -14,7 +14,7 @@ const Login = () => {
 
   const handleSubmit = async (values, { setSubmitting }) => {
     try {
-      const response = await axios.post('/api/v1/login', values);
+      const response = await apiClient.post('/login', values);
       const { token, username } = response.data;
       dispatch(setToken(token));
       dispatch(setUsername(username));
