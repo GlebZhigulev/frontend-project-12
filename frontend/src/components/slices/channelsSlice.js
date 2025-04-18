@@ -13,7 +13,8 @@ export const addChannel = createAsyncThunk(
   'channels/addChannel',
   async (name, { getState, rejectWithValue }) => {
     const { channels } = getState().channels;
-    if (channels.some((ch) => ch.name === name)) {
+    const nameExists = channels.some((ch) => ch.name === name);
+    if (nameExists) {
       return rejectWithValue({ message: 'Channel name already exists' });
     }
     const response = await apiClient.post('/channels', { name });
@@ -33,7 +34,8 @@ export const renameChannel = createAsyncThunk(
   'channels/renameChannel',
   async ({ channelId, newName }, { getState, rejectWithValue }) => {
     const { channels } = getState().channels;
-    if (channels.some((ch) => ch.name === newName)) {
+    const nameExists = channels.some((ch) => ch.name === newName);
+    if (nameExists) {
       return rejectWithValue({ message: 'Channel name already exists' });
     }
     const response = await apiClient.patch(`/channels/${channelId}`, { name: newName });
@@ -41,57 +43,85 @@ export const renameChannel = createAsyncThunk(
   },
 );
 
+const initialState = {
+  channels: [],
+  currentChanelId: null,
+  loading: false,
+  error: null,
+};
+
 const channelsSlice = createSlice({
   name: 'channels',
-  initialState: {
-    channels: [],
-    currentChanelId: null,
-    loading: false,
-    error: null,
-  },
+  initialState,
   reducers: {
-    setCurrentChannel: (state, action) => {
-      state.currentChanelId = action.payload;
-    },
+    setCurrentChannel: (state, action) => ({
+      ...state,
+      currentChanelId: action.payload,
+    }),
   },
   extraReducers: (builder) => {
     builder
-      .addCase(fetchChannels.pending, (state) => {
-        state.loading = true;
-        state.error = null;
-      })
+      .addCase(fetchChannels.pending, (state) => ({
+        ...state,
+        loading: true,
+        error: null,
+      }))
+
       .addCase(fetchChannels.fulfilled, (state, action) => {
-        state.loading = false;
-        state.channels = action.payload;
-        // Установим текущий канал, если он ещё не задан
+        const updatedState = {
+          ...state,
+          loading: false,
+          channels: action.payload,
+        };
+
         if (!state.currentChanelId && action.payload.length > 0) {
-          state.currentChanelId = action.payload[0].id;
+          updatedState.currentChanelId = action.payload[0].id;
         }
-      })
-      .addCase(fetchChannels.rejected, (state, action) => {
-        state.loading = false;
-        state.error = action.error.message;
+
+        return updatedState;
       })
 
-      .addCase(addChannel.fulfilled, (state, action) => {
-        state.channels.push(action.payload);
-        // Автоматически переключаемся на новый канал
-        state.currentChanelId = action.payload.id;
-      })
+      .addCase(fetchChannels.rejected, (state, action) => ({
+        ...state,
+        loading: false,
+        error: action.error.message,
+      }))
+
+      .addCase(addChannel.fulfilled, (state, action) => ({
+        ...state,
+        channels: [...state.channels, action.payload],
+        currentChanelId: action.payload.id,
+      }))
 
       .addCase(removeChannel.fulfilled, (state, action) => {
-        state.channels = state.channels.filter((ch) => ch.id !== action.payload);
-        // Если удалили текущий канал — выбираем другой
+        const updatedChannels = state.channels.filter((ch) => ch.id !== action.payload);
+        let newCurrentChannelId = state.currentChanelId;
+
         if (state.currentChanelId === action.payload) {
-          state.currentChanelId = state.channels.length > 0 ? state.channels[0].id : null;
+          if (updatedChannels.length > 0) {
+            newCurrentChannelId = updatedChannels[0].id;
+          } else {
+            newCurrentChannelId = null;
+          }
         }
+        return {
+          ...state,
+          channels: updatedChannels,
+          currentChanelId: newCurrentChannelId,
+        };
       })
 
       .addCase(renameChannel.fulfilled, (state, action) => {
-        const index = state.channels.findIndex((ch) => ch.id === action.payload.id);
-        if (index !== -1) {
-          state.channels[index] = action.payload;
-        }
+        const updatedChannels = state.channels.map((ch) => {
+          if (ch.id === action.payload.id) {
+            return action.payload;
+          }
+          return ch;
+        });
+        return {
+          ...state,
+          channels: updatedChannels,
+        };
       });
   },
 });
