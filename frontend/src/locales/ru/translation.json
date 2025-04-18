@@ -28,7 +28,8 @@
       "loginBtn": "Войти",
       "noAccount": "Нет аккаунта?",
       "signupLink": "Зарегистрироваться",
-      "invalidCredentials": "Неверные имя пользователя или пароль"
+      "invalidCredentials": "Неверные имя пользователя или пароль",
+      "loggingIn": "Загрузка"
     },
     "signup": {
       "title": "Регистрация",
@@ -36,7 +37,8 @@
       "password": "Пароль",
       "confirmPassword": "Подтвердите пароль",
       "signupBtn": "Зарегистрироваться",
-      "userExists": "Такой пользователь уже существует"
+      "userExists": "Такой пользователь уже существует",
+      "registering": "Загрузка"
     },
     "modals": {
       "addChannelTitle": "Добавить канал",
