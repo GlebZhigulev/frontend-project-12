@@ -1,5 +1,6 @@
 ### Hexlet tests and linter status:
 [![Actions Status](https://github.com/GlebZhigulev/frontend-project-12/actions/workflows/hexlet-check.yml/badge.svg)](https://github.com/GlebZhigulev/frontend-project-12/actions)
+[![Maintainability](https://qlty.sh/badges/f8913586-4826-4d01-9b68-0a54a7400a20/maintainability.svg)](https://qlty.sh/gh/GlebZhigulev/projects/frontend-project-12)
 
 ## 🌐 Демо
 
