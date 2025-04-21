@@ -12,11 +12,11 @@ const SignupForm = ({ onSubmit }) => {
   const initialValues = { username: '', password: '', confirmPassword: '' };
   const validationSchema = Yup.object({
     username: Yup.string()
-      .min(3, 'От 3 до 20 символов')
-      .max(20, 'От 3 до 20 символов')
+      .min(3, t('validation.length'))
+      .max(20, t('validation.length'))
       .required('Обязательное поле'),
     password: Yup.string()
-      .min(6, 'Не менее 6 символов')
+      .min(6, t('validation.password'))
       .required('Обязательное поле'),
     confirmPassword: Yup.string()
       .oneOf([Yup.ref('password'), null], 'Пароли должны совпадать')

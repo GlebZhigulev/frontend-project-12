@@ -19,9 +19,9 @@ const RenameChannelModal = ({ channel, onClose }) => {
 
   const validationSchema = Yup.object({
     name: Yup.string()
-      .min(3, 'От 3 до 20 символов')
-      .max(20, 'От 3 до 20 символов')
-      .test('unique', 'Имя канала должно быть уникальным', (value) => !channels.some((ch) => ch.name === value && ch.id !== channel.id))
+      .min(3, t('validation.length'))
+      .max(20, t('validation.length'))
+      .test('unique', t('validation.unique'), (value) => !channels.some((ch) => ch.name === value && ch.id !== channel.id))
       .required(t('validation.required')),
   });
 

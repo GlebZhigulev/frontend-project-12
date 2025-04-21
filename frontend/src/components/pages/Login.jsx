@@ -5,6 +5,7 @@ import { useTranslation } from 'react-i18next';
 import { setToken, setError, setUsername } from '../../slices/authSlice';
 import LoginForm from '../forms/LoginForm';
 import apiClient from '../../tools/apiClient';
+import routes from '../../tools/routes';
 
 const Login = () => {
   const dispatch = useDispatch();
@@ -18,7 +19,7 @@ const Login = () => {
       const { token, username } = response.data;
       dispatch(setToken(token));
       dispatch(setUsername(username));
-      navigate('/');
+      navigate(routes.root);
     } catch {
       dispatch(setError(t('login.invalidCredentials')));
     } finally {
@@ -39,7 +40,7 @@ const Login = () => {
               <div className="mt-3">
                 <p>
                   {t('login.noAccount')}
-                  <Link to="/signup">{t('login.signupLink')}</Link>
+                  <Link to={routes.signup}>{t('login.signupLink')}</Link>
                 </p>
               </div>
             </div>

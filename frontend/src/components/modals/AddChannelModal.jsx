@@ -18,8 +18,8 @@ const ChannelForm = ({ onClose }) => {
 
   const validationSchema = Yup.object({
     name: Yup.string()
-      .min(3, 'От 3 до 20 символов')
-      .max(20, 'От 3 до 20 символов')
+      .min(3, t('validation.length'))
+      .max(20, t('validation.length'))
       .test('unique', t('validation.unique'), (value) => !channels.some((ch) => ch.name === value))
       .required(t('validation.required')),
   });

@@ -1,13 +1,15 @@
 import { configureStore } from '@reduxjs/toolkit';
 
 import authReducer from './authSlice';
-import chatReducer from './chatSlice';
+import messagesReducer from './messagesSlice';
 import channelsReducer from './channelsSlice';
+import modalReducer from './modalSlice';
 
 const store = configureStore({
   reducer: {
+    modal: modalReducer,
     auth: authReducer,
-    chat: chatReducer,
+    messages: messagesReducer,
     channels: channelsReducer,
   },
 });

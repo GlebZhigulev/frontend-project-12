@@ -5,6 +5,7 @@ import { useTranslation } from 'react-i18next';
 import { setToken, setUsername } from '../../slices/authSlice';
 import SignupForm from '../forms/SignupForm';
 import apiClient from '../../tools/apiClient';
+import routes from '../../tools/routes';
 
 const Signup = () => {
   const dispatch = useDispatch();
@@ -20,7 +21,7 @@ const Signup = () => {
       const { token, username } = response.data;
       dispatch(setToken(token));
       dispatch(setUsername(username));
-      navigate('/');
+      navigate(routes.root);
     } catch (error) {
       if (error.response && error.response.status === 409) {
         setErrors({ username: t('signup.userExists') });

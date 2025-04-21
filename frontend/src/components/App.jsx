@@ -10,6 +10,10 @@ import Login from './pages/Login';
 import Signup from './pages/Signup';
 import NotFound from './pages/NotFound';
 import Header from './Header';
+import { setupSocket } from '../tools/socket'; // 👈 импорт
+import store from '../slices/store';
+import routes from '../tools/routes';
+import ModalRoot from './modals/ModalRoot';
 
 const App = () => {
   const dispatch = useDispatch();
@@ -20,16 +24,19 @@ const App = () => {
     if (!localToken) {
       dispatch(removeToken());
     }
+
+    setupSocket(store);
   }, [dispatch]);
 
   return (
     <Router>
       <Header />
+      <ModalRoot />
       <Routes>
-        <Route path="/" element={token ? <Chat /> : <Navigate to="/login" replace />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/signup" element={<Signup />} />
-        <Route path="*" element={<NotFound />} />
+        <Route path={routes.root} element={token ? <Chat /> : <Navigate to={routes.login} replace />} />
+        <Route path={routes.login} element={<Login />} />
+        <Route path={routes.signup} element={<Signup />} />
+        <Route path={routes.notFound} element={<NotFound />} />
       </Routes>
     </Router>
   );

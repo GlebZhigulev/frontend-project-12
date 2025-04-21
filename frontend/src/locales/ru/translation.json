@@ -57,6 +57,7 @@
       "channelNotDeleted": "Ошибка удаления канала"
     },
     "validation": {
-      "required" : "Обязательное поле"
+      "required" : "Обязательное поле",
+      "length" : "От 3 до 20 символов"
     }
 }
