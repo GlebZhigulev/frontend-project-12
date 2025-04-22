@@ -45,14 +45,13 @@ export const AuthProvider = ({ children }) => {
     navigate(routes.login);
   };
 
-  // ✅ мемоизируем value, чтобы не вызывать лишние перерендеры
   const contextValue = useMemo(() => ({
     token,
     username,
     error,
     login,
     logout,
-  }), [token, username, error]);
+  }), [token, username, error, login, logout]);
 
   return (
     <AuthContext.Provider value={contextValue}>
