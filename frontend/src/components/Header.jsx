@@ -2,7 +2,7 @@
 import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import routes from '../tools/routes';
-import { useAuth } from './contexts/AuthContext';
+import { useAuth } from '../contexts/AuthContext';
 
 const Header = () => {
   const { t } = useTranslation();

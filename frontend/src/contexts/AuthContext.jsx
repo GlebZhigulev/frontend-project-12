@@ -3,8 +3,8 @@ import React, {
 } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
-import apiClient from '../../tools/apiClient';
-import routes from '../../tools/routes';
+import apiClient from '../tools/apiClient';
+import routes from '../tools/routes';
 
 const AuthContext = createContext();
 

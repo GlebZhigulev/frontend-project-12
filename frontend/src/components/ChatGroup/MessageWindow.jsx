@@ -5,7 +5,7 @@ import { Formik, Form, Field } from 'formik';
 import { toast } from 'react-toastify';
 import leoProfanity from 'leo-profanity';
 import apiClient from '../../tools/apiClient';
-import { useAuth } from '../contexts/AuthContext';
+import { useAuth } from '../../contexts/AuthContext';
 
 const MessageWindow = () => {
   const { t } = useTranslation();

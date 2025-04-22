@@ -2,7 +2,7 @@ import React from 'react';
 import { useTranslation } from 'react-i18next';
 import SignupForm from '../forms/SignupForm';
 import apiClient from '../../tools/apiClient';
-import { useAuth } from '../contexts/AuthContext';
+import { useAuth } from '../../contexts/AuthContext';
 
 const Signup = () => {
   const { t } = useTranslation();

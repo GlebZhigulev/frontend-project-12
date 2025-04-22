@@ -2,7 +2,7 @@
 import {
   BrowserRouter as Router, Route, Routes, Navigate,
 } from 'react-router-dom';
-import { useAuth, AuthProvider } from './contexts/AuthContext';
+import { useAuth, AuthProvider } from '../contexts/AuthContext';
 import Chat from './pages/Chat';
 import Login from './pages/Login';
 import Signup from './pages/Signup';

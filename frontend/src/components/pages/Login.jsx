@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import LoginForm from '../forms/LoginForm';
 import routes from '../../tools/routes';
-import { useAuth } from '../contexts/AuthContext';
+import { useAuth } from '../../contexts/AuthContext';
 
 const Login = () => {
   const { login, error } = useAuth();
