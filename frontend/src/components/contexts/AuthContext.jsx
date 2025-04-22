@@ -1,5 +1,5 @@
 import React, {
-  createContext, useContext, useEffect, useState,
+  createContext, useContext, useEffect, useMemo, useState,
 } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
@@ -14,6 +14,8 @@ export const AuthProvider = ({ children }) => {
   const [username, setUsername] = useState(localStorage.getItem('username'));
   const [error, setError] = useState(null);
   const navigate = useNavigate();
+
+  apiClient.defaults.headers.common.Authorization = `Bearer ${token}`;
 
   useEffect(() => {
     if (!token) localStorage.removeItem('token');
@@ -43,14 +45,19 @@ export const AuthProvider = ({ children }) => {
     navigate(routes.login);
   };
 
+  // ✅ мемоизируем value, чтобы не вызывать лишние перерендеры
+  const contextValue = useMemo(() => ({
+    token,
+    username,
+    error,
+    login,
+    logout,
+  }), [token, username, error]);
+
   return (
-    <AuthContext.Provider value={{
-      token, username, error, login, logout,
-    }}
-    >
+    <AuthContext.Provider value={contextValue}>
       {children}
     </AuthContext.Provider>
   );
 };
-
 export const useAuth = () => useContext(AuthContext);

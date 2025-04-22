@@ -10,31 +10,37 @@ export const fetchMessages = createAsyncThunk(
   },
 );
 
+const initialState = {
+  messages: [],
+  status: 'idle',
+  error: null,
+};
+
 const messagesSlice = createSlice({
   name: 'messages',
-  initialState: {
-    messages: [],
-    status: 'idle',
-    error: null,
-  },
+  initialState,
   reducers: {
-    addMessage(state, action) {
-      state.messages.push(action.payload);
-    },
+    addMessage: (state, action) => ({
+      ...state,
+      messages: [...state.messages, action.payload],
+    }),
   },
   extraReducers: (builder) => {
     builder
-      .addCase(fetchMessages.pending, (state) => {
-        state.status = 'loading';
-      })
-      .addCase(fetchMessages.fulfilled, (state, action) => {
-        state.status = 'succeeded';
-        state.messages = action.payload;
-      })
-      .addCase(fetchMessages.rejected, (state, action) => {
-        state.status = 'failed';
-        state.error = action.error.message;
-      });
+      .addCase(fetchMessages.pending, (state) => ({
+        ...state,
+        status: 'loading',
+      }))
+      .addCase(fetchMessages.fulfilled, (state, action) => ({
+        ...state,
+        status: 'succeeded',
+        messages: action.payload,
+      }))
+      .addCase(fetchMessages.rejected, (state, action) => ({
+        ...state,
+        status: 'failed',
+        error: action.error.message,
+      }));
   },
 });
 

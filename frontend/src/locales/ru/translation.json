@@ -38,7 +38,8 @@
       "confirmPassword": "Подтвердите пароль",
       "signupBtn": "Зарегистрироваться",
       "userExists": "Такой пользователь уже существует",
-      "registering": "Загрузка"
+      "registering": "Загрузка",
+      "comparePassword": "Пароли должны совпадать"
     },
     "modals": {
       "addChannelTitle": "Добавить канал",

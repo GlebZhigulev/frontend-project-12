@@ -20,7 +20,7 @@ rules:
   no-use-before-define: error
   max-len:
     - error
-    - code: 150
+    - code: 100
   react/jsx-props-no-spreading: error
   react/button-has-type: error
   jsx-a11y/no-autofocus: error

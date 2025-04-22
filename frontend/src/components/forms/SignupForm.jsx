@@ -14,13 +14,13 @@ const SignupForm = ({ onSubmit }) => {
     username: Yup.string()
       .min(3, t('validation.length'))
       .max(20, t('validation.length'))
-      .required('Обязательное поле'),
+      .required(t('validation.required')),
     password: Yup.string()
       .min(6, t('validation.password'))
-      .required('Обязательное поле'),
+      .required(t('validation.required')),
     confirmPassword: Yup.string()
-      .oneOf([Yup.ref('password'), null], 'Пароли должны совпадать')
-      .required('Обязательное поле'),
+      .oneOf([Yup.ref('password'), null], t('signup.comparePassword'))
+      .required(t('validation.required')),
   });
 
   return (
