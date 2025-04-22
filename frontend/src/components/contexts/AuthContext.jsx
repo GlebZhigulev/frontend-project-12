@@ -1,5 +1,5 @@
 import React, {
-  createContext, useContext, useEffect, useMemo, useState,
+  createContext, useContext, useEffect, useMemo, useState, useCallback,
 } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
@@ -21,7 +21,7 @@ export const AuthProvider = ({ children }) => {
     if (!token) localStorage.removeItem('token');
   }, [token]);
 
-  const login = async (values, { setSubmitting, setErrors }) => {
+  const login = useCallback(async (values, { setSubmitting, setErrors }) => {
     try {
       const { data } = await apiClient.post(routes.login, values);
       setToken(data.token);
@@ -35,15 +35,15 @@ export const AuthProvider = ({ children }) => {
     } finally {
       setSubmitting(false);
     }
-  };
+  }, [navigate, t]);
 
-  const logout = () => {
+  const logout = useCallback(() => {
     localStorage.removeItem('token');
     localStorage.removeItem('username');
     setToken(null);
     setUsername(null);
     navigate(routes.login);
-  };
+  }, [navigate]);
 
   const contextValue = useMemo(() => ({
     token,

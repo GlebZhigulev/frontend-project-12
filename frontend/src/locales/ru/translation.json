@@ -42,6 +42,7 @@
       "comparePassword": "Пароли должны совпадать"
     },
     "modals": {
+      "channelName": "Имя канала",
       "addChannelTitle": "Добавить канал",
       "renameChannelTitle": "Управление каналом",
       "deleteChannelTitle": "Удалить",

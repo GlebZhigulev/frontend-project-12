@@ -57,7 +57,7 @@ const RenameChannelModal = ({ channel, onClose }) => {
                 <div className="modal-body">
                   <div className="mb-3">
                     <label className="form-label" htmlFor="channelName">
-                      Имя канала
+                      {t('modals.channelName')}
                       <Field name="name">
                         {({ field }) => (
                           <input
