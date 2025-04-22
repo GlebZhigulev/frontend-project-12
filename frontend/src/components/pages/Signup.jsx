@@ -1,45 +1,38 @@
 import React from 'react';
-import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
-import { setToken, setUsername } from '../../slices/authSlice';
 import SignupForm from '../forms/SignupForm';
 import apiClient from '../../tools/apiClient';
-import routes from '../../tools/routes';
+import { useAuth } from '../contexts/AuthContext';
 
 const Signup = () => {
-  const dispatch = useDispatch();
-  const navigate = useNavigate();
   const { t } = useTranslation();
+  const { login } = useAuth();
 
   const handleSubmit = async (values, { setSubmitting, setErrors }) => {
     try {
-      const response = await apiClient.post('/signup', {
+      await apiClient.post('/signup', {
         username: values.username,
         password: values.password,
       });
-      const { token, username } = response.data;
-      dispatch(setToken(token));
-      dispatch(setUsername(username));
-      navigate(routes.root);
+      // логинимся с теми же данными
+      login(values, { setSubmitting });
     } catch (error) {
-      if (error.response && error.response.status === 409) {
+      if (error.response?.status === 409) {
         setErrors({ username: t('signup.userExists') });
       } else {
         setErrors({ general: t('errors.default') });
       }
-    } finally {
       setSubmitting(false);
     }
   };
-
   return (
     <div className="container my-5">
       <div className="row justify-content-center">
         <div className="col-md-6">
           <div className="card">
             <div className="card-header">
-              <h3>Регистрация</h3>
+              <h3>{t('signup.title')}</h3>
             </div>
             <div className="card-body">
               <SignupForm onSubmit={handleSubmit} />

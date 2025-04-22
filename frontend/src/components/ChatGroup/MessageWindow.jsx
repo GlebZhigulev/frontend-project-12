@@ -5,12 +5,13 @@ import { Formik, Form, Field } from 'formik';
 import { toast } from 'react-toastify';
 import leoProfanity from 'leo-profanity';
 import apiClient from '../../tools/apiClient';
+import { useAuth } from '../contexts/AuthContext';
 
 const MessageWindow = () => {
   const { t } = useTranslation();
   const { messages } = useSelector((state) => state.messages);
   const { channels, currentChanelId } = useSelector((state) => state.channels);
-  const username = useSelector((state) => state.auth.username);
+  const { username } = useAuth();
 
   const sentMessages = useRef(new Set());
 

@@ -1,21 +1,12 @@
 // Header.jsx
-import { Link, useNavigate } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
+import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
-import { removeToken } from '../slices/authSlice';
 import routes from '../tools/routes';
+import { useAuth } from './contexts/AuthContext';
 
 const Header = () => {
-  const dispatch = useDispatch();
-  const navigate = useNavigate();
   const { t } = useTranslation();
-
-  const token = useSelector((state) => state.auth.token);
-
-  const handleLogout = () => {
-    dispatch(removeToken());
-    navigate('/login');
-  };
+  const { token, logout } = useAuth();
 
   return (
     <nav className="navbar navbar-dark bg-dark mb-3">
@@ -27,7 +18,7 @@ const Header = () => {
         </Link>
         <div>
           {token ? (
-            <button type="button" className="btn btn-outline-light" onClick={handleLogout}>
+            <button type="button" className="btn btn-outline-light" onClick={logout}>
               {t('header.logout')}
             </button>
           ) : (

@@ -1,30 +1,16 @@
 import React from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { useNavigate, Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
-import { setToken, setError, setUsername } from '../../slices/authSlice';
 import LoginForm from '../forms/LoginForm';
-import apiClient from '../../tools/apiClient';
 import routes from '../../tools/routes';
+import { useAuth } from '../contexts/AuthContext';
 
 const Login = () => {
-  const dispatch = useDispatch();
-  const navigate = useNavigate();
+  const { login, error } = useAuth();
   const { t } = useTranslation();
-  const error = useSelector((state) => state.auth.error);
 
-  const handleSubmit = async (values, { setSubmitting }) => {
-    try {
-      const response = await apiClient.post('/login', values);
-      const { token, username } = response.data;
-      dispatch(setToken(token));
-      dispatch(setUsername(username));
-      navigate(routes.root);
-    } catch {
-      dispatch(setError(t('login.invalidCredentials')));
-    } finally {
-      setSubmitting(false);
-    }
+  const handleSubmit = (values, formikHelpers) => {
+    login(values, formikHelpers);
   };
 
   return (

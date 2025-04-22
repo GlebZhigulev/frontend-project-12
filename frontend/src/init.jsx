@@ -21,10 +21,8 @@ const init = async () => {
 
   return (
     <I18nextProvider i18n={i18n}>
-      <>
-        <App />
-        <ToastContainer />
-      </>
+      <App />
+      <ToastContainer />
     </I18nextProvider>
   );
 };
